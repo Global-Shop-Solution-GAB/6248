@@ -1,0 +1,1358 @@
+﻿Program.Sub.ScreenSU.Start
+Gui.Form..Create(DashForm)
+Gui.Form..Caption("Lean Manufacturing")
+Gui.Form..Size(1359,707)
+Gui.Form..MinX(0)
+Gui.Form..MinY(0)
+Gui.Form..Position(0,0)
+Gui.Form..AlwaysOnTop(False)
+Gui.Form..FontName("Tahoma")
+Gui.Form..FontSize(8.25)
+Gui.Form..ControlBox(True)
+Gui.Form..MaxButton(True)
+Gui.Form..MinButton(True)
+Gui.Form..MousePointer(0)
+Gui.Form..Moveable(True)
+Gui.Form..Sizeable(True)
+Gui.Form..ShowInTaskBar(True)
+Gui.Form..TitleBar(True)
+Gui.Form..Event(UnLoad,Form_UnLoad)
+Gui.Form..BarSaveButton(False,True)
+Gui.Form..BarRefreshButton(True)
+Gui.Form..BarHelpButton(True,"Lean Manufacturing","Project 6248","",5.0.0,"3/15/2021 12:00:00 AM","Dashboards",0,0,False)
+Gui.Form..BarExportButton(True)
+Gui.Form..Event(ExportClick,Form_ExportClick)
+Gui.Form..Event(RefreshClick,Form_RefreshClick)
+Gui.Form..Event(SaveButtonClick,Form_SaveButtonClick)
+Gui.Form.lbl1.Create(Label,"Variability Weight",True,83,13,0,6,9,True,0,"Tahoma",8.25,,0,0)
+Gui.Form.lbl1.BorderStyle(0)
+Gui.Form.txtVarWeight.Create(TextBox,"1",True,41,20,0,95,7,True,1,"Tahoma",8.25,,1)
+Gui.Form.txtVarWeight.TabStop(True)
+Gui.Form.txtVarWeight.TabIndex(1)
+Gui.Form.txtVarWeight.Event(LostFocus,txtVarWeight_LostFocus)
+Gui.Form.txtVarWeight.NumericOnly(1)
+Gui.Form.lbl2.Create(Label,"Seasonal Weight",True,80,13,0,152,9,True,0,"Tahoma",8.25,,0,0)
+Gui.Form.lbl2.BorderStyle(0)
+Gui.Form.txtSeasonWeight.Create(TextBox,"1",True,43,20,0,240,7,True,0,"Tahoma",8.25,,1)
+Gui.Form.txtSeasonWeight.TabStop(True)
+Gui.Form.txtSeasonWeight.TabIndex(2)
+Gui.Form.txtSeasonWeight.Event(LostFocus,txtSeasonWeight_LostFocus)
+Gui.Form.txtSeasonWeight.NumericOnly(1)
+Gui.Form.gsInv.Create(GsGridControl)
+Gui.Form.gsInv.Enabled(True)
+Gui.Form.gsInv.Visible(True)
+Gui.Form.gsInv.Zorder(0)
+Gui.Form.gsInv.Size(1348,602)
+Gui.Form.gsInv.Position(6,34)
+Gui.Form.gsInv.Anchor(15)
+Gui.Form.gsInv.TabStop(True)
+Gui.Form.gsInv.TabIndex(5)
+Gui.Form.gsInv.Event(RowCellClick,gsInv_RowCellClick)
+Gui.Form.gsInv.Event(CellValueChanged,gsInv_CellValueChanged)
+Gui.Form.cmdUpdateOrderQty.Create(Button)
+Gui.Form.cmdUpdateOrderQty.Enabled(True)
+Gui.Form.cmdUpdateOrderQty.Visible(True)
+Gui.Form.cmdUpdateOrderQty.Zorder(0)
+Gui.Form.cmdUpdateOrderQty.Size(127,20)
+Gui.Form.cmdUpdateOrderQty.Position(295,7)
+Gui.Form.cmdUpdateOrderQty.Caption("Update Order Qty")
+Gui.Form.cmdUpdateOrderQty.FontName("Tahoma")
+Gui.Form.cmdUpdateOrderQty.FontSize(8.25)
+Gui.Form.cmdUpdateOrderQty.BackColor(11920639)
+Gui.Form.cmdUpdateOrderQty.Event(Click,cmdUpdateOrderQty_Click)
+Gui.Form.cmdUpdateLead.Create(Button)
+Gui.Form.cmdUpdateLead.Enabled(True)
+Gui.Form.cmdUpdateLead.Visible(True)
+Gui.Form.cmdUpdateLead.Zorder(0)
+Gui.Form.cmdUpdateLead.Size(89,20)
+Gui.Form.cmdUpdateLead.Position(430,7)
+Gui.Form.cmdUpdateLead.Caption("Update Lead")
+Gui.Form.cmdUpdateLead.FontName("Tahoma")
+Gui.Form.cmdUpdateLead.FontSize(8.25)
+Gui.Form.cmdUpdateLead.BackColor(11200750)
+Gui.Form.cmdUpdateLead.Event(Click,cmdUpdateLead_Click)
+Gui.Form.cmdUpdateReorderPoint.Create(Button)
+Gui.Form.cmdUpdateReorderPoint.Enabled(True)
+Gui.Form.cmdUpdateReorderPoint.Visible(True)
+Gui.Form.cmdUpdateReorderPoint.Zorder(0)
+Gui.Form.cmdUpdateReorderPoint.Size(127,20)
+Gui.Form.cmdUpdateReorderPoint.Position(526,7)
+Gui.Form.cmdUpdateReorderPoint.Caption("Update Reorder Point")
+Gui.Form.cmdUpdateReorderPoint.FontName("Tahoma")
+Gui.Form.cmdUpdateReorderPoint.FontSize(8.25)
+Gui.Form.cmdUpdateReorderPoint.BackColor(3329434)
+Gui.Form.cmdUpdateReorderPoint.Event(Click,cmdUpdateReorderPoint_Click)
+Gui.Progress..Create(BaseForm)
+Gui.Progress..Caption("Progress")
+Gui.Progress..Size(1007,71)
+Gui.Progress..MinX(0)
+Gui.Progress..MinY(0)
+Gui.Progress..Position(0,0)
+Gui.Progress..AlwaysOnTop(False)
+Gui.Progress..FontName("Tahoma")
+Gui.Progress..FontSize(8.25)
+Gui.Progress..ControlBox(True)
+Gui.Progress..MaxButton(True)
+Gui.Progress..MinButton(True)
+Gui.Progress..MousePointer(0)
+Gui.Progress..Moveable(True)
+Gui.Progress..Sizeable(True)
+Gui.Progress..ShowInTaskBar(True)
+Gui.Progress..TitleBar(True)
+Gui.Progress..Event(UnLoad,Progress_UnLoad)
+Gui.Progress.proBar1.Create(ProgressBar)
+Gui.Progress.proBar1.Visible(True)
+Gui.Progress.proBar1.Size(966,7)
+Gui.Progress.proBar1.Position(21,19)
+Program.Sub.ScreenSU.End
+
+Program.Sub.Preflight.Start
+v.Global.bLoad.Declare
+v.Global.sPart.Declare
+v.Global.sLoc.Declare
+v.Global.iRowIndex.Declare
+v.Global.bReset.Declare
+Program.External.Include.Library("3500.lib",False)
+Program.Sub.Preflight.End
+
+Program.Sub.Main.Start
+Function.Intrinsic.UI.UsePixels ' Allows you to use Pixels instead of Twips throughout
+F.Intrinsic.Control.Try	
+
+
+	F.ODBC.Connection!conx.OpenCompanyConnection(500)
+	f.Intrinsic.Control.CallSub(Update_Version)
+	f.Intrinsic.Control.CallSub(Check_Table)	
+	f.Intrinsic.Control.CallSub(Load)
+
+	'Bind Context Menu
+	f.Intrinsic.Control.CallSub(CreateContextMenu)
+
+	gui.Form..Visible(True)	
+
+f.Intrinsic.Control.Catch
+	f.Intrinsic.Control.CallSub("Catching","sub",v.Ambient.CurrentSubroutine,"errorno",v.Ambient.ErrorNumber,"errordesc",v.Ambient.ErrorDescription)
+f.Intrinsic.Control.EndTry
+Program.Sub.Main.End
+
+Program.Sub.Update_Version.Start
+F.Intrinsic.Control.Try	
+	v.Local.sVersion.Declare
+	v.Local.fVersion.Declare
+	v.Local.bExist.Declare
+
+	F.Global.Registry.ReadValue(V.Caller.User,V.Caller.CompanyCode,"GVINV",6248,9999,5,"",V.Local.sVersion)
+	v.Local.fVersion.Set(v.Local.sVersion)
+	f.Intrinsic.Control.If(v.Local.fVersion,<,5)
+		F.ODBC.Connection!conx.TableExists("GCG_6248_Aggre",V.Local.bExist)
+		F.Intrinsic.Control.If(V.Local.bExist)
+			f.ODBC.Connection!conx.Execute("Drop table GCG_6248_Aggre")
+		F.Intrinsic.Control.EndIf				
+		'Reset serialize
+		F.Global.Registry.AddValue(V.Caller.User,V.Caller.CompanyCode,"GVINV",6248,1000,False,"Serialize",False,0,-999.0,1/1/1980,12:00:00 AM,"")	
+		F.Global.Registry.AddValue(V.Caller.User,V.Caller.CompanyCode,"GVINV",6248,9999,False,"5.0",False,0,-999.0,1/1/1980,12:00:00 AM,"")
+		gui.Form..ShowAlert("MyAlert","Version Updated","Updated version 1.0.0 to 5.0.0",v.Enum.Image!WARNING_BLACK)
+		v.Global.bReset.Set(True)
+	f.Intrinsic.Control.EndIf
+
+f.Intrinsic.Control.Catch
+	f.Intrinsic.Control.CallSub("Catching","sub",v.Ambient.CurrentSubroutine,"errorno",v.Ambient.ErrorNumber,"errordesc",v.Ambient.ErrorDescription)
+f.Intrinsic.Control.EndTry
+Program.Sub.Update_Version.End
+
+Program.Sub.Unload.Start
+F.Intrinsic.Control.Try	
+
+	F.ODBC.Connection!conx.Close
+	F.Intrinsic.Control.End 
+
+f.Intrinsic.Control.Catch
+	F.Intrinsic.Control.End 
+f.Intrinsic.Control.EndTry	
+Program.Sub.Unload.End
+
+Program.Sub.Catching.Start
+f.Intrinsic.Control.Try
+	v.Local.sError.Declare
+
+	F.Intrinsic.String.Build("Project: GCG_6248_Mark.g2u {0}Subroutine: {1}{0}Error Occurred {2} with description {3}{0}GAB Version: {4}",V.Ambient.Newline,V.Ambient.CurrentSubroutine,V.Ambient.ErrorNumber,V.Ambient.ErrorDescription,V.Ambient.GABVersion,V.Local.sError)
+	F.Intrinsic.UI.Msgbox(V.Local.sError)
+
+	f.Intrinsic.Control.CallSub(Unload)
+
+f.Intrinsic.Control.Catch
+	f.Intrinsic.Control.End
+
+f.Intrinsic.Control.EndTry
+Program.Sub.Catching.End
+
+Program.Sub.Form_UnLoad.Start
+F.Intrinsic.Control.Try	
+
+	f.Intrinsic.Control.If(v.Global.bLoad)
+		f.Intrinsic.Control.CallSub(Serialize)
+	f.Intrinsic.Control.EndIf
+
+	f.Intrinsic.Control.CallSub(Unload)	
+
+f.Intrinsic.Control.Catch
+	f.Intrinsic.Control.CallSub("Catching","sub",v.Ambient.CurrentSubroutine,"errorno",v.Ambient.ErrorNumber,"errordesc",v.Ambient.ErrorDescription)
+f.Intrinsic.Control.EndTry
+Program.Sub.Form_UnLoad.End
+
+Program.Sub.Serialize.Start
+F.Intrinsic.Control.Try
+	V.Local.sError.Declare
+	V.Local.sSerialize.Declare
+
+	Gui.Form.gsInv.Serialize("gvInv",V.Local.sSerialize)
+	F.Global.Registry.AddValue(V.Caller.User,V.Caller.CompanyCode,"GVINV",6248,1000,False,"Serialize",False,0,-999.0,1/1/1980,12:00:00 AM,V.Local.sSerialize)
+
+f.Intrinsic.Control.Catch
+	f.Intrinsic.Control.CallSub("Catching","sub",v.Ambient.CurrentSubroutine,"errorno",v.Ambient.ErrorNumber,"errordesc",v.Ambient.ErrorDescription)
+f.Intrinsic.Control.EndTry
+Program.Sub.Serialize.End
+
+Program.Sub.Deserialize.Start
+F.Intrinsic.Control.Try
+	V.Local.sError.Declare	
+	V.Local.sSerialize.Declare	
+
+	F.Global.Registry.ReadValue(V.Caller.User,V.Caller.CompanyCode,"GVINV",6248,1000,6,"",V.Local.sSerialize)
+	F.Intrinsic.Control.If(V.Local.sSerialize.Trim,<>,"")
+		Gui.Form.gsInv.Deserialize(V.Local.sSerialize)
+	F.Intrinsic.Control.EndIf
+
+F.Intrinsic.Control.Catch
+	F.Intrinsic.String.Build("Project: {0}{1}{1}Subroutine: {2}{1}Error Occurred {3} with description {4}{1}{1}GAB Version: {5}",V.Ambient.ScriptPath,V.Ambient.Newline,V.Ambient.CurrentSubroutine,V.Ambient.ErrorNumber,V.Ambient.ErrorDescription,V.Ambient.GABVersion,V.Local.sError)
+	F.Intrinsic.UI.Msgbox(V.Local.sError)
+	F.Intrinsic.Control.End
+
+F.Intrinsic.Control.EndTry
+Program.Sub.Deserialize.End
+
+Program.Sub.Load.Start
+F.Intrinsic.Control.Try	
+	v.Local.bEx.Declare
+	v.Local.sSQL.Declare
+	v.Local.dStartDate.Declare
+	v.Local.dEndate.Declare
+	v.Local.sEndDate.Declare
+	v.Local.sStartDate.Declare	
+
+	v.Local.iDay.Declare
+	v.Local.dHold.Declare
+	v.Local.iMonth.Declare
+	v.Local.iYear.Declare
+	v.Local.sDate.Declare
+	v.Local.iCnt.Declare
+	v.Local.sFilter.Declare
+
+	v.Local.fSeasonalWeight.Declare
+	v.Local.sExpression.Declare
+
+	v.Local.dLastYearMonthStart.Declare
+	v.Local.dLastYearMonthEnd.Declare
+	v.Local.sLastYearMonthStart.Declare
+	v.Local.sLastYearMonthEnd.Declare	
+	v.Local.dStart90days.Declare
+	v.Local.sStart90days.Declare
+
+	v.Local.fVariabilityWeight.Declare	
+
+	F.Intrinsic.UI.InvokeWaitDialog("Please wait...")
+
+	f.Intrinsic.Control.If(v.Global.bLoad)
+		f.Intrinsic.Control.CallSub(Serialize)
+		gui.Form.gsInv.ClearRows("gvInv")
+	f.Intrinsic.Control.EndIf
+
+	v.Local.dEndate.Set(v.Ambient.Date)	
+	f.Intrinsic.Date.Year(v.Local.dEndate,v.Local.iYear)
+	f.Intrinsic.Date.Month(v.Local.dEndate,v.Local.iMonth)
+	f.Intrinsic.Date.Day(v.Local.dEndate,v.Local.iDay)
+	f.Intrinsic.Math.Sub(v.Local.iYear,1,v.Local.iYear)
+	f.Intrinsic.String.Build("{0}/{1}/{2}",v.Local.iMonth,v.Local.iDay,v.Local.iYear,v.Local.sDate)
+	f.Intrinsic.Date.IsDate(v.Local.sDate,v.Local.bEx)
+	f.Intrinsic.Control.If(v.Local.bEx)
+		v.Local.dStartDate.Set(v.Local.sDate)
+		f.Intrinsic.Date.DateAdd("D",1,v.Local.dStartDate,v.Local.dStartDate)
+	f.Intrinsic.Control.Else
+		f.Intrinsic.Control.If(v.Local.iMonth,=,2,and,v.Local.iDay,=,29)
+			v.Local.iMonth.Set(3)
+			v.Local.iDay.Set(1)
+			f.Intrinsic.String.Build("{0}/{1}/{2}",v.Local.iMonth,v.Local.iDay,v.Local.iYear,v.Local.sDate)
+			v.Local.dStartDate.Set(v.Local.sDate)
+		f.Intrinsic.Control.Else
+			f.Intrinsic.UI.Msgbox("Invalid date")
+			f.Intrinsic.Control.ExitSub
+		f.Intrinsic.Control.EndIf	
+	f.Intrinsic.Control.EndIf
+
+	f.Intrinsic.String.Right(v.Local.dStartDate.FormatYYYYMMDD,6,v.Local.sStartDate)
+	f.Intrinsic.String.Right(v.Local.dEndate.FormatYYYYMMDD,6,v.Local.sEndDate)
+
+'	V.Local.dStartDate.Set("01/01/2020")
+'	v.Local.sStartDate.Set("200101")
+'	V.Local.dEndate.Set("12/31/2020")
+'	v.Local.sEndDate.Set("201231")
+
+
+	'Calculate Last Year Month start and end
+	f.Intrinsic.Date.DateAdd("D",-1,v.Local.dStartDate,v.Local.dLastYearMonthEnd)
+	f.Intrinsic.Date.DateAdd("D",-29,v.Local.dLastYearMonthEnd,v.Local.dLastYearMonthStart)
+	f.Intrinsic.String.Right(v.Local.dLastYearMonthStart.FormatYYYYMMDD,6,v.Local.sLastYearMonthStart)
+	f.Intrinsic.String.Right(v.Local.dLastYearMonthEnd.FormatYYYYMMDD,6,v.Local.sLastYearMonthEnd)	
+
+	'Calculate previous 90 days starting
+	f.Intrinsic.Date.DateAdd("D",-89,v.Local.dEndate,v.Local.dStart90days)
+	f.Intrinsic.String.Right(v.Local.dStart90days.FormatYYYYMMDD,6,v.Local.sStart90days)	
+
+	f.Intrinsic.Control.If(v.DataTable.Inv.Exists)
+		f.Data.DataTable.Close("Inv")
+	f.Intrinsic.Control.EndIf
+	f.Data.DataTable.CreateFromSQL("Inv","conx","select Convert(0,SQL_Bit) as SELECTROW,Part,Location,Part + Location as PartLoc,Description,Product_Line,Code_Sort,UM_Inventory,Qty_Onhand,Qty_OnOrder_PO,Qty_OnOrder_WO ,Qty_Required,Qty_Onhand + Qty_OnOrder_PO + Qty_OnOrder_WO - Qty_Required as Net,Qty_Order,TIME_MATERIAL_LEAD as LeadTime,Qty_Reorder as ReOrderPoint,Convert(0,SQL_Float) as AnnualUsage,Convert(0,SQL_Float) as AvgTransactionAmount from INVENTORY_MSTR order by Part,Location",True)
+
+	'Get Data for the year
+	f.Intrinsic.String.Build("SELECT Part,Location,Part+Location as PartLoc,Convert(Date_history,SQL_Integer) as Date_history,Code_Transaction,Quantity * (-1) as Quantity,Convert(0,SQL_Float) as AnnualUsage,Convert(0,SQL_Float) as AvgTransactionAmount from Inventory_Hist where (DATE_HISTORY BETWEEN '{0}' AND '{1}') AND  Code_Transaction in ('A50','C52','J55','O35','R10','T40') ",v.Local.sStartDate,v.Local.sEndDate,v.Local.sSQL)
+	f.Intrinsic.Control.If(v.DataTable.dtYear.Exists)
+		f.Data.Datatable.Close("dtYear")
+	f.Intrinsic.Control.EndIf	
+	f.Data.Datatable.CreateFromSQL("dtYear","conx",v.Local.sSQL,True)
+
+	'Move year data to a custom table for fast SQL later
+	f.Intrinsic.String.Build("Delete from GCG_6248_Year where UserID = '{0}'",v.Caller.User,v.Local.sSQL)
+	f.ODBC.Connection!conx.Execute(v.Local.sSQL)
+	f.Data.Datatable.AddColumn("dtYear","UserID","String",v.Caller.User)
+	f.Data.Datatable.SaveToDB("dtYear","conx","GCG_6248_Year","",128,"Part@!@Part*!*Location@!@Location*!*Date_History@!@Date_History*!*Code_Transaction@!@Code_Transaction*!*Quantity@!@Quantity*!*UserID@!@UserID")
+
+	'Create Aggregate table
+	f.Intrinsic.Control.If(v.DataTable.Aggre.Exists)
+		f.Data.Datatable.Close("Aggre")
+	f.Intrinsic.Control.EndIf
+	
+	f.Intrinsic.String.Build("Select Part + Location as PartLoc,Sum(Quantity) as AnnualUsage,Sum(Quantity)/262 as AvgDailyUsage,Convert(0,SQL_Float) as TotalSqDif,Count(*) as TransactionCount,Avg(Quantity) as AvgTransactionAmount from GCG_6248_Year where UserID = '{0}' Group by Part,Location",v.Caller.User,v.Local.sSQL)
+	f.Data.Datatable.CreateFromSQL("Aggre","conx",v.Local.sSQL)
+
+	'Transaction Count
+	f.Data.Dictionary.Exists("dictTransCount",v.Local.bEx)
+	f.Intrinsic.Control.If(v.Local.bEx)
+		f.Data.Dictionary.Close("dictTransCount")
+	f.Intrinsic.Control.EndIf	
+	f.Data.Dictionary.CreateFromDatatable("dictTransCount","Aggre","PartLoc","TransactionCount")
+	f.Data.Dictionary.SetDefaultReturn("dictTransCount",0)
+	f.Data.Datatable.AddColumn("Inv","TransactionCount","Float",0)
+	f.Data.Datatable.FillFromDictionary("Inv","dictTransCount","PartLoc","TransactionCount")	
+
+
+
+	f.Data.Dictionary.Exists("dictAnnualUsage",v.Local.bEx)
+	f.Intrinsic.Control.If(v.Local.bEx)
+		f.Data.Dictionary.Close("dictAnnualUsage")
+	f.Intrinsic.Control.EndIf	
+	f.Data.Dictionary.CreateFromDatatable("dictAnnualUsage","Aggre","PartLoc","AnnualUsage")
+	f.Data.Dictionary.SetDefaultReturn("dictAnnualUsage",0)
+	f.Data.Datatable.FillFromDictionary("Inv","dictAnnualUsage","PartLoc","AnnualUsage")
+	'AvgDailyUsage (ADU)
+	f.Data.DataTable.AddExpressionColumn("Inv","AvgDailyUsage","Float","AnnualUsage/262")
+	'Populate Annual usage back to dtYear
+	f.Data.Datatable.FillFromDictionary("dtYear","dictAnnualUsage","PartLoc","AnnualUsage")
+	f.Data.Datatable.AddExpressionColumn("dtYear","AvgDailyUsage","Float","AnnualUsage/262")
+'XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXadded below line average transactionsal amount 
+	f.Data.Dictionary.Exists("dictAvgTransactionAmount",v.Local.bEx)
+	f.Intrinsic.Control.If(v.Local.bEx)
+		f.Data.Dictionary.Close("dictAvgTransactionAmount")
+	f.Intrinsic.Control.EndIf	
+	f.Data.Dictionary.CreateFromDatatable("dictAvgTransactionAmount","Aggre","PartLoc","AvgTransactionAmount")
+	f.Data.Dictionary.SetDefaultReturn("dictAvgTransactionAmount",0)
+	
+	f.Data.Datatable.FillFromDictionary("Inv","dictAvgTransactionAmount","PartLoc","AvgTransactionAmount")
+'AvgTransactionAmount 
+	'f.Data.Datatable.AddExpressionColumn("Inv","AvgTransactionAmount","Float","IIF(TransactionCount = 0,0,AnnualUsage / TransactionCount)")
+	'Populate avg transaction amount usage back to dtYear
+	f.Data.Datatable.FillFromDictionary("dtYear","dictAvgTransactionAmount","PartLoc","AvgTransactionAmount")
+	'f.Data.Datatable.AddExpressionColumn("dtYear","AvgTransactionAmount","Float","IIF(TransactionCount = 0,0,AnnualUsage / TransactionCount)")
+'XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX standard deviation 
+	f.Data.Datatable.AddExpressionColumn("dtYear","SquareDif","Float","(Quantity - AvgTransactionAmount) * (Quantity - AvgTransactionAmount)")
+	'Save back to GCG_6248_SquareDif to Calculate Standard Deviation ADU later
+	f.Intrinsic.String.Build("Delete from GCG_6248_SquareDif where UserID = '{0}'",v.Caller.User,v.Local.sSQL)
+	f.ODBC.Connection!conx.Execute(v.Local.sSQL)
+
+'X<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<< swapped annual usage with TransactionCount for below line.
+
+	f.Data.Datatable.SaveToDB("dtYear","conx","GCG_6248_SquareDif","",128,"PartLoc@!@PartLoc*!*SquareDif@!@SquareDif*!*UserID@!@UserID")
+	'Get Total Square Dif
+	f.Data.Dictionary.Exists("dictTotalSqDif",v.Local.bEx)
+	f.Intrinsic.Control.If(v.Local.bEx)
+		f.Data.Dictionary.Close("dictTotalSqDif")
+	f.Intrinsic.Control.EndIf
+	f.Intrinsic.String.Build("Select PartLoc,Sum(SquareDif) from GCG_6248_SquareDif where UserID = '{0}' Group By PartLoc",v.Caller.User,v.Local.sSQL)
+	f.Data.Dictionary.CreateFromSQL("dictTotalSqDif","conx",v.Local.sSQL)
+	f.Data.Dictionary.SetDefaultReturn("dictTotalSqDif",0)
+	f.Data.Datatable.FillFromDictionary("Aggre","dictTotalSqDif","PartLoc","TotalSqDif")
+	'Save back to dbase to make use of square root function so we don't have to loop in GAB
+	f.Intrinsic.String.Build("Delete from GCG_6248_Aggre where UserID = '{0}'",v.Caller.User,v.Local.sSQL)
+	f.ODBC.Connection!conx.Execute(v.Local.sSQL)
+	f.Data.Datatable.AddColumn("Aggre","UserID","String",v.Caller.User)	
+	f.Data.Datatable.SaveToDB("Aggre","conx","GCG_6248_Aggre","",128,"PartLoc@!@PartLoc*!*TransactionCount@!@TransactionCount*!*AvgDailyUsage@!@AvgDailyUsage*!*TotalSqDif@!@TotalSqDif*!*UserID@!@UserID*!*transactioncount@!@transactioncount")
+	f.Data.Dictionary.Exists("dictStdADU",v.Local.bEx)
+	f.Intrinsic.Control.If(v.Local.bEx)
+		f.Data.Dictionary.Close("dictStdADU")
+	f.Intrinsic.Control.EndIf
+	f.Intrinsic.String.Build("Select PartLoc,If(TransactionCount = 0,0,Sqrt(TotalsqDif/TransactionCount)) as StdADU from GCG_6248_Aggre where UserID = '{0}'",v.Caller.User,v.Local.sSQL)
+	f.Data.Dictionary.CreateFromSQL("dictStdADU","conx",v.Local.sSQL)
+	f.Data.Dictionary.SetDefaultReturn("dictStdADU",0)
+	f.Data.Datatable.AddColumn("Inv","StdADU","Float",0)
+	f.Data.Datatable.FillFromDictionary("Inv","dictStdADU","PartLoc","StdADU")
+		 '>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>
+	'Current Projected Inventory Turn
+	f.Data.Datatable.AddExpressionColumn("Inv","CurProjInvTurn","Float","IIF(Qty_Onhand = 0,0,AnnualUsage / Qty_Onhand)")
+
+	'Projected Days Onhand
+	f.Data.Datatable.AddExpressionColumn("Inv","ProjectedDaysOnhand","Float","IIF(AvgDailyUsage = 0,0,Qty_Onhand / AvgDailyUsage)")
+
+	'Delta of Days on hand
+	f.Data.Datatable.AddExpressionColumn("Inv","DaysOnhandDelta","Float","ProjectedDaysOnhand - LeadTime")	
+
+	'***Reorder Point Calculation
+	'A year ago this month Usage
+	f.Intrinsic.String.Build("SELECT Part,Location,Part+Location as PartLoc,Convert(Date_history,SQL_Integer) as Date_history,Code_Transaction,Quantity * (-1) as Quantity,Convert(0,SQL_Float) as AnnualUsage from Inventory_Hist where (DATE_HISTORY BETWEEN '{0}' AND '{1}') AND  Code_Transaction in ('A50','C52','J55','O35','R10','T40') ",v.Local.sLastYearMonthStart,v.Local.sLastYearMonthEnd,v.Local.sSQL)
+	f.Intrinsic.Control.If(v.DataTable.dtLastYearMonth.Exists)
+		f.Data.Datatable.Close("dtLastYearMonth")
+	f.Intrinsic.Control.EndIf	
+	f.Data.Datatable.CreateFromSQL("dtLastYearMonth","conx",v.Local.sSQL,True)	
+
+	'Move year data to a custom table for fast SQL later
+	f.Intrinsic.String.Build("Delete from GCG_6248_LastYM where UserID = '{0}'",v.Caller.User,v.Local.sSQL)
+	f.ODBC.Connection!conx.Execute(v.Local.sSQL)
+	f.Data.Datatable.AddColumn("dtLastYearMonth","UserID","String",v.Caller.User)
+	f.Data.Datatable.SaveToDB("dtLastYearMonth","conx","GCG_6248_LastYM","",128,"Part@!@Part*!*Location@!@Location*!*Date_History@!@Date_History*!*Code_Transaction@!@Code_Transaction*!*Quantity@!@Quantity*!*UserID@!@UserID")	
+	'Get dictionary for last year this month usage
+	f.Data.Dictionary.Exists("dictLastYM",v.Local.bEx)
+	f.Intrinsic.Control.If(v.Local.bEx)
+		f.Data.Dictionary.Close("dictLastYM")
+	f.Intrinsic.Control.EndIf
+	f.Intrinsic.String.Build("Select Part + Location as PartLoc,Sum(Quantity) as Quantity from GCG_6248_LastYM where UserID = '{0}' Group by Part,Location",v.Caller.User,v.Local.sSQL)
+	f.Data.Dictionary.CreateFromSQL("dictLastYM","conx",v.Local.sSQL)
+	f.Data.Dictionary.SetDefaultReturn("dictLastYM",0)
+	f.Data.Datatable.AddColumn("Inv","LastYMUsage","Float",0)
+	f.Data.Datatable.FillFromDictionary("Inv","dictLastYM","PartLoc","LastYMUsage")
+
+	'Average Month Usage
+	f.Data.Datatable.AddExpressionColumn("Inv","AvgMonthUsage","Float","AnnualUsage / 12")
+	'Seasonal Factor SF
+	f.Data.Datatable.AddExpressionColumn("Inv","SeasonalFactor","Float","IIF(AvgMonthUsage = 0,0,LastYMUsage/AvgMonthUsage)")
+	'Seasonal Weight SW
+	v.Local.fSeasonalWeight.Set(v.Screen.Form!txtSeasonWeight.Text.Trim)
+	f.Intrinsic.String.Build("1 -((1 - SeasonalFactor) * {0})",v.Local.fSeasonalWeight,v.Local.sExpression)
+	'Weighted Seasonal Factor
+	f.Data.Datatable.AddExpressionColumn("Inv","WeightedSeasonalFactor","Float",v.Local.sExpression)
+
+	'Largest Inventory Pull of previous 90 days	
+	f.Data.Dictionary.Exists("dictLargestPull90",v.Local.bEx)
+	f.Intrinsic.Control.If(v.Local.bEx)
+		f.Data.Dictionary.Close("dictLargestPull90")
+	f.Intrinsic.Control.EndIf
+	f.Intrinsic.String.Build("Select Part + Location as PartLoc,Max(Quantity) as Quantity from GCG_6248_Year where UserID = '{0}' and (DATE_HISTORY BETWEEN '{0}' AND '{1}') Group by Part,Location",v.Local.sStart90days,v.Local.sEndDate,v.Caller.User,v.Local.sSQL)
+	f.Data.Dictionary.CreateFromSQL("dictLargestPull90","conx",v.Local.sSQL)
+	f.Data.Dictionary.SetDefaultReturn("dictLargestPull90",0)
+	f.Data.Datatable.AddColumn("Inv","LargestInvPull90Days","Float",0)
+	f.Data.Datatable.FillFromDictionary("Inv","dictLargestPull90","PartLoc","LargestInvPull90Days")	
+	
+
+	'XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXxx
+	'Variability Factor VF renaming to Coeffiecient of Variation 
+	f.Data.Datatable.AddExpressionColumn("Inv","VariabilityFactor","Float","IIF(AvgTransactionAmount = 0,0, StdADU / AvgTransactionAmount)")
+	'Variability Weight VW
+	v.Local.fVariabilityWeight.Set(v.Screen.Form!txtVarWeight.Text.Trim)
+	'XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXxxx
+	'Weighted Variability Factor Renamed Coefficient of Variance 
+	f.Intrinsic.String.Build("1 + (VariabilityFactor * {0})",v.Local.fVariabilityWeight,v.Local.sExpression)
+	f.Data.Datatable.AddExpressionColumn("Inv","WeightedVariabilityFactor","Float",v.Local.sExpression)
+	'****Reorder point
+	f.Data.Datatable.AddExpressionColumn("Inv","CalculatedReOrderPoint","Float","AvgDailyUsage * LeadTime * WeightedSeasonalFactor * WeightedVariabilityFactor")
+
+	'Delta of Calculated Reorder Point
+	f.Data.Datatable.AddExpressionColumn("Inv","CalculatedReOrderPointDifference","Float","CalculatedReOrderPoint - ReorderPoint")
+	'ReorderPoint Variance
+	f.Data.Datatable.AddExpressionColumn("Inv","ReOrderPointVarience","Float","IIF(ReorderPoint = 0,0, (CalculatedReorderPoint/ReorderPoint)-1)")
+	'Delta of Net
+	f.Data.Datatable.AddExpressionColumn("Inv","NetDelta","Float","CalculatedReorderPoint - Net")
+	'Net Varience
+	f.Data.Datatable.AddExpressionColumn("Inv","NetVarience","Float","IIF(Net = 0,0,  CalculatedReorderPoint/Net -1)")	
+	
+	'Cost
+	f.Data.Datatable.AddColumn("Inv","Cost","Float",0)
+	f.Data.Dictionary.Exists("dictCost",v.Local.bEx)
+	f.Intrinsic.Control.If(v.Local.bEx)
+		f.Data.Dictionary.Close("dictCost")
+	f.Intrinsic.Control.EndIf
+	f.Data.Dictionary.CreateFromSQL("dictCost","conx","Select Part + Location as PartLoc,Amt_Price  from Inventory_Mstr")
+	f.Data.Dictionary.SetDefaultReturn("dictCost",0)
+	f.Data.Datatable.FillFromDictionary("Inv","dictCost","PartLoc","Cost")	
+	'Cost Estimate Delta
+	f.Data.Datatable.AddExpressionColumn("Inv","CostEstimateDelta","Float","(CalculatedReorderPoint - Net) * Cost")
+
+	f.Data.Datatable.AddColumn("Inv","CalculatedRPointDisplay","Float",0)	
+	
+	f.Data.DataTable.SetValueFormat("Inv",-1,"CalculatedReorderPoint","CalculatedRPointDisplay","0")
+	
+	f.Data.DataTable.AddExpressionColumn("Inv","CalculatedReorderPoint2","Float","IsNull(CalculatedReorderPoint,Convert('0',System.Double))")
+	f.Data.DataTable.SetValueFormat("Inv",-1,"CalculatedReorderPoint2","CalculatedRPointDisplay","0")	
+	f.Data.DataTable.RemoveColumn("Inv","CalculatedReorderPoint2")
+
+
+		'Part create date
+	f.Data.Dictionary.Exists("dictPartCreateDate",v.Local.bEx)
+	f.Intrinsic.Control.If(v.Local.bEx)
+		f.Data.Dictionary.Close("dictPartCreateDate")
+	f.Intrinsic.Control.EndIf
+	f.Data.Dictionary.CreateFromSQL("dictPartCreateDate","conx","Select Part + Location as PartLoc,Part_Create_Date  from v_Inventory_Mst3")
+	f.Data.Dictionary.SetDefaultReturn("dictPartCreateDate","01/01/1900")	
+	f.Data.Datatable.AddColumn("Inv","PartCreateDate","Date","01/01/1900")
+	f.Data.Datatable.FillFromDictionary("Inv","dictPartCreateDate","PartLoc","PartCreateDate")	
+
+	f.Intrinsic.Control.CallSub(Format_Inv)
+	f.Intrinsic.Control.CallSub(Deserialize)
+	'f.Data.Datatable.SaveToXML("Inv",0,True,"D:\WORKING\MY\6248 Lean Manufacturing Dashboard\Inv.xml")
+
+
+	f.Intrinsic.UI.CloseWaitDialog
+	v.Global.bLoad.Set(True)
+
+f.Intrinsic.Control.Catch
+	f.Intrinsic.Control.CallSub("Catching","sub",v.Ambient.CurrentSubroutine,"errorno",v.Ambient.ErrorNumber,"errordesc",v.Ambient.ErrorDescription)
+f.Intrinsic.Control.EndTry
+Program.Sub.Load.End
+
+Program.Sub.Check_Table.Start
+F.Intrinsic.Control.Try	
+	v.Local.bExist.Declare
+
+	F.ODBC.Connection!conx.TableExists("GCG_6248_Aggre",V.Local.bExist)
+	F.Intrinsic.Control.If(V.Local.bExist.Not)
+		F.ODBC.Connection!conx.Execute("CREATE TABLE GCG_6248_Aggre ( PartLoc VARCHAR(22), AnnualUsage NUMERIC(15,6), AvgDailyUsage NUMERIC(15,6),transactioncount NUMERIC(15,6), TotalSqDif NUMERIC(30,12), UserID CHAR(8) );")
+	F.Intrinsic.Control.EndIf	
+	f.Intrinsic.Control.CallSub("Check_Index","sTable","GCG_6248_Aggre","sIndex","GCG_6248_Aggre01")
+	f.Intrinsic.Control.If(v.Args.bExist,=,False)
+		f.ODBC.Connection!conx.Execute("CREATE INDEX GCG_6248_Aggre01   ON GCG_6248_Aggre ( UserID);")
+	f.Intrinsic.Control.EndIf		
+
+	F.ODBC.Connection!conx.TableExists("GCG_6248_SquareDif",V.Local.bExist)
+	F.Intrinsic.Control.If(V.Local.bExist.Not)
+		F.ODBC.Connection!conx.Execute("CREATE TABLE GCG_6248_SquareDif ( PartLoc VARCHAR(22), SquareDif NUMERIC(30,12), UserID CHAR(8) );")
+	F.Intrinsic.Control.EndIf	
+	f.Intrinsic.Control.CallSub("Check_Index","sTable","GCG_6248_SquareDif","sIndex","GCG_6248_SquareDif01")
+	f.Intrinsic.Control.If(v.Args.bExist,=,False)
+		f.ODBC.Connection!conx.Execute("CREATE INDEX GCG_6248_SquareDif01   ON GCG_6248_SquareDif ( UserID);")
+	f.Intrinsic.Control.EndIf		
+
+	F.ODBC.Connection!conx.TableExists("GCG_6248_Year",V.Local.bExist)
+	F.Intrinsic.Control.If(V.Local.bExist.Not)
+		F.ODBC.Connection!conx.Execute("CREATE TABLE GCG_6248_Year ( Part CHAR(20), Location CHAR(2), Date_History INTEGER, Code_Transaction CHAR(3), Quantity NUMERIC(15,6), UserID CHAR(8) );")
+	F.Intrinsic.Control.EndIf	
+	f.Intrinsic.Control.CallSub("Check_Index","sTable","GCG_6248_Year","sIndex","GCG_6248_Year01")
+	f.Intrinsic.Control.If(v.Args.bExist,=,False)
+		f.ODBC.Connection!conx.Execute("CREATE INDEX GCG_6248_Year01   ON GCG_6248_Year ( UserID);")
+	f.Intrinsic.Control.EndIf		
+	f.Intrinsic.Control.CallSub("Check_Index","sTable","GCG_6248_Year","sIndex","GCG_6248_Year02")
+	f.Intrinsic.Control.If(v.Args.bExist,=,False)
+		f.ODBC.Connection!conx.Execute("CREATE INDEX GCG_6248_Year02   ON GCG_6248_Year ( UserID,Date_History);")
+	f.Intrinsic.Control.EndIf		
+
+	F.ODBC.Connection!conx.TableExists("GCG_6248_LastYM",V.Local.bExist)
+	F.Intrinsic.Control.If(V.Local.bExist.Not)
+		F.ODBC.Connection!conx.Execute("CREATE TABLE GCG_6248_LastYM ( Part CHAR(20), Location CHAR(2), Date_History INTEGER, Code_Transaction CHAR(3), Quantity NUMERIC(15,6), UserID CHAR(8) );")
+	F.Intrinsic.Control.EndIf	
+	f.Intrinsic.Control.CallSub("Check_Index","sTable","GCG_6248_LastYM","sIndex","GCG_6248_LastYM01")
+	f.Intrinsic.Control.If(v.Args.bExist,=,False)
+		f.ODBC.Connection!conx.Execute("CREATE INDEX GCG_6248_LastYM01   ON GCG_6248_LastYM ( UserID);")
+	f.Intrinsic.Control.EndIf			
+
+f.Intrinsic.Control.Catch
+	f.Intrinsic.Control.CallSub("Catching","sub",v.Ambient.CurrentSubroutine,"errorno",v.Ambient.ErrorNumber,"errordesc",v.Ambient.ErrorDescription)
+f.Intrinsic.Control.EndTry
+Program.Sub.Check_Table.End
+
+Program.Sub.Check_Index.Start
+f.Intrinsic.Control.Try
+	v.Local.sError.Declare
+	v.Local.sSQL.Declare
+	v.Local.sRet.Declare
+	v.Local.bExist.Declare
+
+	f.Intrinsic.String.Build("Select Xf$Name As TableName,F1.XE$Name As FieldName,F1.Xe$DataType as DataType FROM X$File INNER JOIN X$Field F1 On F1.XE$File = XF$ID WHERE Xf$Name = '{0}' and F1.XE$Name = '{1}'",v.Args.sTable,v.Args.sIndex,v.Local.sSQL)
+	f.ODBC.Connection!conx.ExecuteAndReturn(v.Local.sSQL,v.Local.sRet)
+	f.Intrinsic.Control.If(v.Ambient.ExecuteAndReturnEOF.Not)
+		v.Local.bExist.Set(True)
+	f.Intrinsic.Control.EndIf
+	f.Intrinsic.Variable.AddRV("bExist",v.Local.bExist)
+
+F.Intrinsic.Control.Catch
+	F.Intrinsic.String.Build("Project: {0}{1}{1}Subroutine: {2}{1}Error Occurred {3} with description {4}{1}{1}GAB Version: {5}",V.Ambient.ScriptPath,V.Ambient.Newline,V.Ambient.CurrentSubroutine,V.Ambient.ErrorNumber,V.Ambient.ErrorDescription,V.Ambient.GABVersion,V.Local.sError)
+	f.Intrinsic.Control.CallSub("Write_GAB_Error_Log","sError",v.Local.sError)
+	'if any error, assume the index exists
+	f.Intrinsic.Variable.AddRV("bExist",True)
+F.Intrinsic.Control.EndTry
+Program.Sub.Check_Index.End
+
+Program.Sub.Form_ExportClick.Start
+F.Intrinsic.Control.Try
+	V.Local.sError.Declare
+
+	V.Local.sFileExport.Declare
+	V.Local.bExcel.Declare
+	V.Local.bFileLocked.Declare
+	V.Local.sMsg.Declare
+
+	F.Automation.MSExcel.CheckPresence(V.Local.bExcel)
+
+	F.Intrinsic.Control.If(V.Local.bExcel)
+		F.Intrinsic.String.Build("{0}\LeanMFG.xlsx",V.Caller.LocalGssTempDir,V.Local.sFileExport)
+		F.Intrinsic.File.IsFileLocked(V.Local.sFileExport,V.Local.bFileLocked)
+		F.Intrinsic.Control.If(V.Local.bFileLocked)
+			F.Intrinsic.String.Build("File is already open. Please close and export again.{0}File: {1}",V.Ambient.NewLine,V.Local.sFileExport,V.Local.sMsg)
+			F.Intrinsic.UI.Msgbox(V.Local.sMsg,"File In Use")
+		F.Intrinsic.Control.Else
+			Gui.Form.gsInv.Export(V.Local.sFileExport,"xlsx")
+			F.Intrinsic.Task.ShellExec(0,"",V.Local.sFileExport,"","",1)
+		F.Intrinsic.Control.EndIf
+	F.Intrinsic.Control.Else
+		F.Intrinsic.String.Build("{0}\LeanMFG.csv",V.Caller.LocalGssTempDir,V.Local.sFileExport)
+		F.Intrinsic.File.IsFileLocked(V.Local.sFileExport,V.Local.bFileLocked)
+		F.Intrinsic.Control.If(V.Local.bFileLocked)
+			F.Intrinsic.String.Build("File is already open. Please close and export again.{0}File: {1}",V.Ambient.NewLine,V.Local.sFileExport,V.Local.sMsg)
+			F.Intrinsic.UI.Msgbox(V.Local.sMsg,"File In Use")
+		F.Intrinsic.Control.Else
+			Gui.Form.gsInv.Export(V.Local.sFileExport,"csv")
+		F.Intrinsic.Control.EndIf
+			F.Intrinsic.Task.ShellExec(0,"",V.Local.sFileExport,"","",1)
+	F.Intrinsic.Control.EndIf
+
+f.Intrinsic.Control.Catch
+	f.Intrinsic.Control.CallSub("Catching","sub",v.Ambient.CurrentSubroutine,"errorno",v.Ambient.ErrorNumber,"errordesc",v.Ambient.ErrorDescription)
+f.Intrinsic.Control.EndTry
+Program.Sub.Form_ExportClick.End
+
+Program.Sub.Form_RefreshClick.Start
+f.Intrinsic.Control.CallSub(Load)
+'gui.Form..ShowAlert("mainAlert","Loaded","",v.Enum.Image!WARNING_BLACK)
+Program.Sub.Form_RefreshClick.End
+
+Program.Sub.Form_SaveButtonClick.Start
+f.Intrinsic.UI.Msgbox("Save")
+Program.Sub.Form_SaveButtonClick.End
+
+Program.Sub.Load_SampleData.Start
+F.Intrinsic.Control.Try	
+	v.Local.bExist.Declare
+	v.Local.sCt.Declare
+	v.Local.iC.Declare
+	v.Local.sPart.Declare
+	v.Local.sDate.Declare
+	v.Local.sTrans.Declare
+	v.Local.sQty.Declare
+	v.Local.sHold.Declare
+	v.Local.sLoc.Declare
+
+	f.Data.Datatable.Create("Temp",True)
+	f.Data.Datatable.AddColumn("Temp","Part","String","")
+	f.Data.Datatable.AddColumn("Temp","Location","String","")
+	f.Data.Datatable.AddColumn("Temp","Date_History","long",0)
+	f.Data.Datatable.AddColumn("Temp","Code_Transaction","String","")
+	f.Data.Datatable.AddColumn("Temp","Quantity","float",0)
+	f.Data.Datatable.AddColumn("Temp","UserID","String",v.Caller.User)
+
+	f.Intrinsic.File.File2String("D:\WORKING\MY\6248 Lean Manufacturing Dashboard\hist_text",v.Local.sCt)	
+	f.Intrinsic.String.Split(v.Local.sCt,v.Ambient.NewLine,v.Local.sCt)	
+
+	f.Intrinsic.Control.For(v.Local.iC,0,v.Local.sCt.UBound,1)	
+		v.Local.sHold.Set(v.Local.sCt(v.Local.iC))
+		v.Local.sPart.Set(v.local.sHold.Left20)
+		f.Intrinsic.String.Mid(v.local.sHold,24,6,v.Local.sDate)
+		f.Intrinsic.String.Mid(v.local.sHold,39,3,v.Local.sTrans)
+		f.Intrinsic.String.Mid(v.local.sHold,53,22,v.Local.sQty)
+		f.Intrinsic.String.Mid(v.local.sHold,78,2,v.Local.sLoc)		
+
+		f.Data.Datatable.AddRow("Temp","Part",v.Local.sPart,"Location",v.Local.sLoc,"Date_History",v.Local.sDate,"Code_Transaction",v.Local.sTrans.Trim,"Quantity",v.Local.sQty.Trim,"UserID",v.Caller.User)	
+	f.Intrinsic.Control.Next(v.Local.iC)
+
+	f.Data.Datatable.SaveToDB("Temp","conx","Inventory_Hist","",128,"Part@!@Part*!*Location@!@Location*!*Date_History@!@Date_History*!*Code_Transaction@!@Code_Transaction*!*Quantity@!@Quantity*!*UserID@!@UserID")
+
+	f.Intrinsic.UI.Msgbox("Done")
+
+f.Intrinsic.Control.Catch
+	f.Intrinsic.Control.CallSub("Catching","sub",v.Ambient.CurrentSubroutine,"errorno",v.Ambient.ErrorNumber,"errordesc",v.Ambient.ErrorDescription)
+f.Intrinsic.Control.EndTry
+Program.Sub.Load_SampleData.End
+
+Program.Sub.txtVarWeight_LostFocus.Start
+f.Intrinsic.Control.Try
+	v.Local.sError.Declare
+	v.Local.fNum.Declare
+
+	v.Local.fNum.Set(v.Screen.Form!txtVarWeight.Text.Trim)
+	f.Intrinsic.Control.If(v.Local.fNum,>,1,or,v.Local.fNum,<,0)
+		f.Intrinsic.UI.Msgbox("Value must be between 0 and 1","Attention")
+		gui.Form.txtVarWeight.Text("1")
+		gui.Form.txtVarWeight.SetFocus
+	f.Intrinsic.Control.EndIf
+
+f.Intrinsic.Control.Catch
+	f.Intrinsic.UI.Msgbox(v.Ambient.ErrorDescription)
+f.Intrinsic.Control.EndTry
+Program.Sub.txtVarWeight_LostFocus.End
+
+Program.Sub.txtSeasonWeight_LostFocus.Start
+f.Intrinsic.Control.Try
+	v.Local.sError.Declare
+	v.Local.fNum.Declare
+
+	v.Local.fNum.Set(v.Screen.Form!txtSeasonWeight.Text.Trim)
+	f.Intrinsic.Control.If(v.Local.fNum,>,1,or,v.Local.fNum,<,0)
+		f.Intrinsic.UI.Msgbox("Value must be between 0 and 1","Attention")
+		gui.Form.txtSeasonWeight.Text("1")
+		gui.Form.txtSeasonWeight.SetFocus
+	f.Intrinsic.Control.EndIf
+
+f.Intrinsic.Control.Catch
+	f.Intrinsic.UI.Msgbox(v.Ambient.ErrorDescription)
+f.Intrinsic.Control.EndTry
+Program.Sub.txtSeasonWeight_LostFocus.End
+Program.Sub.Format_Inv.Start
+F.Intrinsic.Control.Try	
+	v.Local.iIndex.Declare
+	v.Local.sProp.Declare
+	v.Local.sValue.Declare	
+
+	gui.Form.gsInv.AddGridviewFromDatatable("gvInv","Inv")
+
+	Gui.Form.gsInv.SetGridViewProperty("gvInv","AllowSort",True)
+	Gui.Form.gsInv.SetGridViewProperty("gvInv","AllowFilter",True)
+	Gui.Form.gsInv.SetGridViewProperty("gvInv","OptionsDetailShowDetailTabs",False)
+	Gui.Form.gsInv.SetGridViewProperty("gvInv","OptionsViewShowGroupPanel",True)
+	Gui.Form.gsInv.SetGridViewProperty("gvInv","EnableAppearanceOddRow",True)
+	Gui.Form.gsInv.SetGridViewProperty("gvInv","AllowColumnResizing",True)
+	Gui.Form.gsInv.SetGridViewProperty("gvInv","OptionsViewColumnAutoWidth",False)
+	Gui.Form.gsInv.SetGridViewProperty("gvInv","OptionsViewShowAutoFilterRow",True)
+	Gui.Form.gsInv.SetGridViewProperty("gvInv","ColumnPanelRowHeight","50")
+	Gui.Form.gsInv.SetGridViewProperty("gvInv",v.Enum.GridViewPropertyNames!SuppressNothingDates, True)
+
+	f.Intrinsic.Control.CallSub("FormatColumns","sProp","MinWidth","sValue","20")	
+	f.Intrinsic.Control.CallSub("FormatColumns","sProp","HeaderFontBold","sValue","True")
+	f.Intrinsic.Control.CallSub("FormatColumns","sProp","HeaderWordWrap","sValue","Wrap")
+	f.Intrinsic.Control.CallSub("FormatColumns","sProp","HeaderVAlignment","sValue","Top")
+
+	v.Local.iIndex.Set(-1)
+	f.Intrinsic.Control.If(v.Global.bReset)
+		v.Local.sProp.Set("VisibleIndex")
+		gui.Form.gsInv.SetColumnProperty("gvInv","SelectRow",v.Local.sProp,v.Local.iIndex.++)
+		gui.Form.gsInv.SetColumnProperty("gvInv","Part",v.Local.sProp,v.Local.iIndex.++)
+		gui.Form.gsInv.SetColumnProperty("gvInv","Location",v.Local.sProp,v.Local.iIndex.++)
+		gui.Form.gsInv.SetColumnProperty("gvInv","PartLoc",v.Local.sProp,v.Local.iIndex.++)
+		gui.Form.gsInv.SetColumnProperty("gvInv","Description",v.Local.sProp,v.Local.iIndex.++)
+		gui.Form.gsInv.SetColumnProperty("gvInv","Product_Line",v.Local.sProp,v.Local.iIndex.++)
+		gui.Form.gsInv.SetColumnProperty("gvInv","Code_Sort",v.Local.sProp,v.Local.iIndex.++)
+		gui.Form.gsInv.SetColumnProperty("gvInv","UM_Inventory",v.Local.sProp,v.Local.iIndex.++)
+		gui.Form.gsInv.SetColumnProperty("gvInv","PartCreateDate",v.Local.sProp,v.Local.iIndex.++)
+		gui.Form.gsInv.SetColumnProperty("gvInv","Qty_Order",v.Local.sProp,v.Local.iIndex.++)	
+		gui.Form.gsInv.SetColumnProperty("gvInv","LeadTime",v.Local.sProp,v.Local.iIndex.++)
+		
+		gui.Form.gsInv.SetColumnProperty("gvInv","Qty_Onhand",v.Local.sProp,v.Local.iIndex.++)
+		gui.Form.gsInv.SetColumnProperty("gvInv","Qty_OnOrder_PO",v.Local.sProp,v.Local.iIndex.++)
+		gui.Form.gsInv.SetColumnProperty("gvInv","Qty_OnOrder_WO",v.Local.sProp,v.Local.iIndex.++)
+		gui.Form.gsInv.SetColumnProperty("gvInv","Qty_Required",v.Local.sProp,v.Local.iIndex.++)
+		gui.Form.gsInv.SetColumnProperty("gvInv","Net",v.Local.sProp,v.Local.iIndex.++)		
+		gui.Form.gsInv.SetColumnProperty("gvInv","ReOrderPoint",v.Local.sProp,v.Local.iIndex.++)	
+		gui.Form.gsInv.SetColumnProperty("gvInv","Cost",v.Local.sProp,v.Local.iIndex.++)
+
+		gui.Form.gsInv.SetColumnProperty("gvInv","AnnualUsage",v.Local.sProp,v.Local.iIndex.++)
+		gui.Form.gsInv.SetColumnProperty("gvInv","TransactionCount",v.Local.sProp,v.Local.iIndex.++)
+		gui.Form.gsInv.SetColumnProperty("gvInv","AvgTransactionAmount",v.Local.sProp,v.Local.iIndex.++)
+		gui.Form.gsInv.SetColumnProperty("gvInv","AvgDailyUsage",v.Local.sProp,v.Local.iIndex.++)
+		
+		
+		gui.Form.gsInv.SetColumnProperty("gvInv","CurProjInvTurn",v.Local.sProp,v.Local.iIndex.++)
+		gui.Form.gsInv.SetColumnProperty("gvInv","ProjectedDaysOnhand",v.Local.sProp,v.Local.iIndex.++)
+		gui.Form.gsInv.SetColumnProperty("gvInv","DaysOnhandDelta",v.Local.sProp,v.Local.iIndex.++)		
+
+		gui.Form.gsInv.SetColumnProperty("gvInv","LastYMUsage",v.Local.sProp,v.Local.iIndex.++)
+		gui.Form.gsInv.SetColumnProperty("gvInv","AvgMonthUsage",v.Local.sProp,v.Local.iIndex.++)
+		gui.Form.gsInv.SetColumnProperty("gvInv","SeasonalFactor",v.Local.sProp,v.Local.iIndex.++)
+		gui.Form.gsInv.SetColumnProperty("gvInv","WeightedSeasonalFactor",v.Local.sProp,v.Local.iIndex.++)
+		gui.Form.gsInv.SetColumnProperty("gvInv","LargestInvPull90Days",v.Local.sProp,v.Local.iIndex.++)
+		
+		gui.Form.gsInv.SetColumnProperty("gvInv","StdADU",v.Local.sProp,v.Local.iIndex.++)
+		gui.Form.gsInv.SetColumnProperty("gvInv","VariabilityFactor",v.Local.sProp,v.Local.iIndex.++)
+		gui.Form.gsInv.SetColumnProperty("gvInv","WeightedVariabilityFactor",v.Local.sProp,v.Local.iIndex.++)
+
+		gui.Form.gsInv.SetColumnProperty("gvInv","CalculatedRPointDisplay",v.Local.sProp,v.Local.iIndex.++)		
+		
+		gui.Form.gsInv.SetColumnProperty("gvInv","CalculatedReorderPointDifference",v.Local.sProp,v.Local.iIndex.++)
+		gui.Form.gsInv.SetColumnProperty("gvInv","ReorderPointVarience",v.Local.sProp,v.Local.iIndex.++)
+		gui.Form.gsInv.SetColumnProperty("gvInv","NetDelta",v.Local.sProp,v.Local.iIndex.++)
+		gui.Form.gsInv.SetColumnProperty("gvInv","NetVarience",v.Local.sProp,v.Local.iIndex.++)		
+		gui.Form.gsInv.SetColumnProperty("gvInv","CostEstimateDelta",v.Local.sProp,v.Local.iIndex.++)
+
+		'gui.Form.gsInv.SetColumnProperty("gvInv","CalculatedReorderPoint",v.Local.sProp,v.Local.iIndex.++)
+
+	f.Intrinsic.Control.EndIf	
+
+	gui.Form.gsInv.SetColumnProperty("gvInv","SelectRow","AllowEdit",False)
+	gui.Form.gsInv.SetColumnProperty("gvInv","SelectRow","ReadOnly",True)
+
+	gui.Form.gsInv.SetColumnProperty("gvInv","Part","AllowEdit",False)
+	gui.Form.gsInv.SetColumnProperty("gvInv","Part","ReadOnly",True)
+
+	gui.Form.gsInv.SetColumnProperty("gvInv","Location","AllowEdit",False)
+	gui.Form.gsInv.SetColumnProperty("gvInv","Location","ReadOnly",True)
+
+	gui.Form.gsInv.SetColumnProperty("gvInv","CalculatedRPointDisplay","AllowEdit",True)
+	gui.Form.gsInv.SetColumnProperty("gvInv","CalculatedRPointDisplay","ReadOnly",False)	
+
+	gui.Form.gsInv.SetColumnProperty("gvInv","Qty_Order","AllowEdit",True)
+	gui.Form.gsInv.SetColumnProperty("gvInv","Qty_Order","ReadOnly",False)	
+
+	gui.Form.gsInv.SetColumnProperty("gvInv","LeadTime","AllowEdit",True)
+	gui.Form.gsInv.SetColumnProperty("gvInv","LeadTime","ReadOnly",False)		
+
+	gui.Form.gsInv.SetColumnProperty("gvInv","Part","CellForeColor","Blue")
+	gui.Form.gsInv.SetColumnProperty("gvInv","Location","CellForeColor","Blue")
+
+	'AllowShowHide
+	gui.Form.gsInv.SetColumnProperty("gvInv","CalculatedReorderPoint","Visible",False)
+	gui.Form.gsInv.SetColumnProperty("gvInv","LargestInvPull90Days","Visible",False)
+	gui.Form.gsInv.SetColumnProperty("gvInv","CalculatedReorderPoint","AllowShowHide",False)
+
+	gui.Form.gsInv.SetColumnProperty("gvInv","PartLoc","Visible",False)
+	gui.Form.gsInv.SetColumnProperty("gvInv","PartLoc","AllowShowHide",False)
+
+	v.Local.sProp.Set("Caption")
+	gui.Form.gsInv.SetColumnProperty("gvInv","Part",v.Local.sProp,"Part")
+	gui.Form.gsInv.SetColumnProperty("gvInv","Location",v.Local.sProp,"Locn")
+	gui.Form.gsInv.SetColumnProperty("gvInv","PartLoc",v.Local.sProp,"PartLoc")
+	gui.Form.gsInv.SetColumnProperty("gvInv","Description",v.Local.sProp,"Description")
+	gui.Form.gsInv.SetColumnProperty("gvInv","PartCreateDate",v.Local.sProp,"Create Date")
+	gui.Form.gsInv.SetColumnProperty("gvInv","Product_Line",v.Local.sProp,"PL")
+	gui.Form.gsInv.SetColumnProperty("gvInv","Code_Sort",v.Local.sProp,"Sort")
+	gui.Form.gsInv.SetColumnProperty("gvInv","UM_Inventory",v.Local.sProp,"UM")
+	gui.Form.gsInv.SetColumnProperty("gvInv","Qty_Onhand",v.Local.sProp,"On hand")
+	gui.Form.gsInv.SetColumnProperty("gvInv","Qty_OnOrder_PO",v.Local.sProp,"On Order PO")
+	gui.Form.gsInv.SetColumnProperty("gvInv","Qty_OnOrder_WO",v.Local.sProp,"On Order WO")
+	gui.Form.gsInv.SetColumnProperty("gvInv","Qty_Required",v.Local.sProp,"Required")
+	gui.Form.gsInv.SetColumnProperty("gvInv","Net",v.Local.sProp,"Net")
+	gui.Form.gsInv.SetColumnProperty("gvInv","Qty_Order",v.Local.sProp,"Qty Order")	
+	gui.Form.gsInv.SetColumnProperty("gvInv","LeadTime",v.Local.sProp,"Lead")
+	gui.Form.gsInv.SetColumnProperty("gvInv","ReOrderPoint",v.Local.sProp,"Reorder Point")
+	gui.Form.gsInv.SetColumnProperty("gvInv","AnnualUsage",v.Local.sProp,"Annual Usage")
+	gui.Form.gsInv.SetColumnProperty("gvInv","TransactionCount",v.Local.sProp,"Transaction Count")
+	gui.Form.gsInv.SetColumnProperty("gvInv","AvgTransactionAmount",v.Local.sProp,"Avg Transaction Amount")
+	gui.Form.gsInv.SetColumnProperty("gvInv","AvgDailyUsage",v.Local.sProp,"Avg Daily Usage")
+	
+	'Renaming below. From Std ADU to Trans STD DEV
+	gui.Form.gsInv.SetColumnProperty("gvInv","StdADU",v.Local.sProp,"Trans Std Dev")
+	gui.Form.gsInv.SetColumnProperty("gvInv","CurProjInvTurn",v.Local.sProp,"Cur. Proj. Inv. Turn")
+	gui.Form.gsInv.SetColumnProperty("gvInv","ProjectedDaysOnhand",v.Local.sProp,"Proj. Days Onhand")
+	gui.Form.gsInv.SetColumnProperty("gvInv","DaysOnhandDelta",v.Local.sProp,"Days Onhand Delta")
+	gui.Form.gsInv.SetColumnProperty("gvInv","LastYMUsage",v.Local.sProp,"A Year Ago This Month Usage")
+	gui.Form.gsInv.SetColumnProperty("gvInv","AvgMonthUsage",v.Local.sProp,"Avg. Month Usage")
+	gui.Form.gsInv.SetColumnProperty("gvInv","SeasonalFactor",v.Local.sProp,"Seasonal Factor")
+	gui.Form.gsInv.SetColumnProperty("gvInv","WeightedSeasonalFactor",v.Local.sProp,"Weighted Seasonal Factor")
+	gui.Form.gsInv.SetColumnProperty("gvInv","LargestInvPull90Days",v.Local.sProp,"Largest of previous 90 Days Inv. Pull")
+	
+	'Rename below to Coefficient of Variance 
+	gui.Form.gsInv.SetColumnProperty("gvInv","VariabilityFactor",v.Local.sProp,"Coefficient of Variation")
+	gui.Form.gsInv.SetColumnProperty("gvInv","WeightedVariabilityFactor",v.Local.sProp,"Weighted Coefficient of Variation Factor")
+	gui.Form.gsInv.SetColumnProperty("gvInv","CalculatedReorderPoint",v.Local.sProp,"Calculated Reorder Point")
+	gui.Form.gsInv.SetColumnProperty("gvInv","CalculatedReorderPointDifference",v.Local.sProp,"Calculated ReorderPoint Difference")
+	gui.Form.gsInv.SetColumnProperty("gvInv","ReorderPointVarience",v.Local.sProp,"Reorder Point Varience")
+	gui.Form.gsInv.SetColumnProperty("gvInv","NetDelta",v.Local.sProp,"Net Delta")
+	gui.Form.gsInv.SetColumnProperty("gvInv","NetVarience",v.Local.sProp,"Net Varience")
+	gui.Form.gsInv.SetColumnProperty("gvInv","Cost",v.Local.sProp,"Cost")
+	gui.Form.gsInv.SetColumnProperty("gvInv","CostEstimateDelta",v.Local.sProp,"Cost Estimate Delta")	
+	gui.Form.gsInv.SetColumnProperty("gvInv","SelectRow",v.Local.sProp,"Select")
+	gui.Form.gsInv.SetColumnProperty("gvInv","CalculatedRPointDisplay",v.Local.sProp,"Calculated ReorderPoint")
+	'Fixed left
+	gui.Form.gsInv.SetColumnProperty("gvInv","SelectRow","fixed","left")
+	gui.Form.gsInv.SetColumnProperty("gvInv","Part","fixed","left")
+	gui.Form.gsInv.SetColumnProperty("gvInv","Location","fixed","left")			
+
+	'Header far
+	v.Local.sProp.Set("HEADERHALIGNMENT")
+	gui.Form.gsInv.SetColumnProperty("gvInv","UM_Inventory",v.Local.sProp,"center")
+	gui.Form.gsInv.SetColumnProperty("gvInv","UM_Inventory","CELLHALIGNMENT","center")
+	gui.Form.gsInv.SetColumnProperty("gvInv","Product_Line",v.Local.sProp,"center")
+	gui.Form.gsInv.SetColumnProperty("gvInv","Product_Line","CELLHALIGNMENT","center")	
+	gui.Form.gsInv.SetColumnProperty("gvInv","SelectRow",v.Local.sProp,"center")
+	gui.Form.gsInv.SetColumnProperty("gvInv","SelectRow","CELLHALIGNMENT","center")
+	gui.Form.gsInv.SetColumnProperty("gvInv","Qty_Onhand",v.Local.sProp,"far")
+	gui.Form.gsInv.SetColumnProperty("gvInv","Qty_OnOrder_PO",v.Local.sProp,"far")
+	gui.Form.gsInv.SetColumnProperty("gvInv","Qty_OnOrder_WO",v.Local.sProp,"far")
+	gui.Form.gsInv.SetColumnProperty("gvInv","Qty_Required",v.Local.sProp,"far")
+	gui.Form.gsInv.SetColumnProperty("gvInv","Net",v.Local.sProp,"far")
+	gui.Form.gsInv.SetColumnProperty("gvInv","Qty_Order",v.Local.sProp,"far")	
+	gui.Form.gsInv.SetColumnProperty("gvInv","LeadTime",v.Local.sProp,"far")
+	gui.Form.gsInv.SetColumnProperty("gvInv","ReOrderPoint",v.Local.sProp,"far")
+	gui.Form.gsInv.SetColumnProperty("gvInv","AnnualUsage",v.Local.sProp,"far")
+	gui.Form.gsInv.SetColumnProperty("gvInv","TransactionCount",v.Local.sProp,"far")
+	gui.Form.gsInv.SetColumnProperty("gvInv","AvgTransactionAmount",v.Local.sProp,"far")
+	gui.Form.gsInv.SetColumnProperty("gvInv","AvgDailyUsage",v.Local.sProp,"far")
+	gui.Form.gsInv.SetColumnProperty("gvInv","StdADU",v.Local.sProp,"far")
+	gui.Form.gsInv.SetColumnProperty("gvInv","CurProjInvTurn",v.Local.sProp,"far")
+	gui.Form.gsInv.SetColumnProperty("gvInv","ProjectedDaysOnhand",v.Local.sProp,"far")
+	gui.Form.gsInv.SetColumnProperty("gvInv","DaysOnhandDelta",v.Local.sProp,"far")
+	gui.Form.gsInv.SetColumnProperty("gvInv","LastYMUsage",v.Local.sProp,"far")
+	gui.Form.gsInv.SetColumnProperty("gvInv","AvgMonthUsage",v.Local.sProp,"far")
+	gui.Form.gsInv.SetColumnProperty("gvInv","SeasonalFactor",v.Local.sProp,"far")
+	gui.Form.gsInv.SetColumnProperty("gvInv","WeightedSeasonalFactor",v.Local.sProp,"far")
+	gui.Form.gsInv.SetColumnProperty("gvInv","LargestInvPull90Days",v.Local.sProp,"far")
+	gui.Form.gsInv.SetColumnProperty("gvInv","VariabilityFactor",v.Local.sProp,"far")
+	gui.Form.gsInv.SetColumnProperty("gvInv","WeightedVariabilityFactor",v.Local.sProp,"far")
+	gui.Form.gsInv.SetColumnProperty("gvInv","CalculatedReorderPoint",v.Local.sProp,"far")
+	gui.Form.gsInv.SetColumnProperty("gvInv","CalculatedReorderPointDifference",v.Local.sProp,"far")
+	gui.Form.gsInv.SetColumnProperty("gvInv","ReorderPointVarience",v.Local.sProp,"far")
+	gui.Form.gsInv.SetColumnProperty("gvInv","NetDelta",v.Local.sProp,"far")
+	gui.Form.gsInv.SetColumnProperty("gvInv","NetVarience",v.Local.sProp,"far")
+	gui.Form.gsInv.SetColumnProperty("gvInv","Cost",v.Local.sProp,"far")
+	gui.Form.gsInv.SetColumnProperty("gvInv","CostEstimateDelta",v.Local.sProp,"far")
+	gui.Form.gsInv.SetColumnProperty("gvInv","CalculatedRPointDisplay",v.Local.sProp,"far")	
+
+	v.Local.sProp.Set("DisplayCustomNumeric")
+	gui.Form.gsInv.SetColumnProperty("gvInv","Qty_Onhand",v.Local.sProp,"#,###,###,##0.0000")
+	gui.Form.gsInv.SetColumnProperty("gvInv","Qty_OnOrder_PO",v.Local.sProp,"#,###,###,##0.0000")
+	gui.Form.gsInv.SetColumnProperty("gvInv","Qty_OnOrder_WO",v.Local.sProp,"#,###,###,##0.0000")
+	gui.Form.gsInv.SetColumnProperty("gvInv","Qty_Required",v.Local.sProp,"#,###,###,##0.0000")
+	gui.Form.gsInv.SetColumnProperty("gvInv","Net",v.Local.sProp,"#,###,###,##0.0000")
+	gui.Form.gsInv.SetColumnProperty("gvInv","Qty_Order",v.Local.sProp,"#,###,###,##0.0000")	
+	gui.Form.gsInv.SetColumnProperty("gvInv","LeadTime",v.Local.sProp,"#,###,###,##0.0000")
+	gui.Form.gsInv.SetColumnProperty("gvInv","ReOrderPoint",v.Local.sProp,"#,###,###,##0.0000")
+	gui.Form.gsInv.SetColumnProperty("gvInv","AnnualUsage",v.Local.sProp,"#,###,###,##0.0000")
+	gui.Form.gsInv.SetColumnProperty("gvInv","AvgDailyUsage",v.Local.sProp,"#,###,###,##0.0000")
+	gui.Form.gsInv.SetColumnProperty("gvInv","Transactioncount",v.Local.sProp,"#,###,###,##0")
+	gui.Form.gsInv.SetColumnProperty("gvInv","AvgTransactionAmount",v.Local.sProp,"#,###,###,##0.0000")
+	gui.Form.gsInv.SetColumnProperty("gvInv","StdADU",v.Local.sProp,"#,###,###,##0.0000")
+	gui.Form.gsInv.SetColumnProperty("gvInv","CurProjInvTurn",v.Local.sProp,"#,###,###,##0.0000")
+	gui.Form.gsInv.SetColumnProperty("gvInv","ProjectedDaysOnhand",v.Local.sProp,"#,###,###,##0.0000")
+	gui.Form.gsInv.SetColumnProperty("gvInv","DaysOnhandDelta",v.Local.sProp,"#,###,###,##0.0000")
+	gui.Form.gsInv.SetColumnProperty("gvInv","LastYMUsage",v.Local.sProp,"#,###,###,##0.0000")
+	gui.Form.gsInv.SetColumnProperty("gvInv","AvgMonthUsage",v.Local.sProp,"#,###,###,##0.0000")
+	gui.Form.gsInv.SetColumnProperty("gvInv","SeasonalFactor",v.Local.sProp,"#,###,###,##0.0000")
+	gui.Form.gsInv.SetColumnProperty("gvInv","WeightedSeasonalFactor",v.Local.sProp,"#,###,###,##0.0000")
+	gui.Form.gsInv.SetColumnProperty("gvInv","LargestInvPull90Days",v.Local.sProp,"#,###,###,##0.0000")
+	gui.Form.gsInv.SetColumnProperty("gvInv","VariabilityFactor",v.Local.sProp,"#,###,###,##0.0000")
+	gui.Form.gsInv.SetColumnProperty("gvInv","WeightedVariabilityFactor",v.Local.sProp,"#,###,###,##0.0000")
+	gui.Form.gsInv.SetColumnProperty("gvInv","CalculatedReorderPoint",v.Local.sProp,"#,###,###,##0.0000")
+	gui.Form.gsInv.SetColumnProperty("gvInv","CalculatedReorderPointDifference",v.Local.sProp,"#,###,###,##0.0000")
+	gui.Form.gsInv.SetColumnProperty("gvInv","ReorderPointVarience",v.Local.sProp,"#,###,###,##0.0000")
+	gui.Form.gsInv.SetColumnProperty("gvInv","NetDelta",v.Local.sProp,"#,###,###,##0.0000")
+	gui.Form.gsInv.SetColumnProperty("gvInv","NetVarience",v.Local.sProp,"#,###,###,##0.0000")
+	gui.Form.gsInv.SetColumnProperty("gvInv","Cost",v.Local.sProp,"#,###,###,##0.0000")
+	gui.Form.gsInv.SetColumnProperty("gvInv","CostEstimateDelta",v.Local.sProp,"#,###,###,##0.0000")
+	gui.Form.gsInv.SetColumnProperty("gvInv","CalculatedRPointDisplay",v.Local.sProp,"#,###,###,##0.0000")
+
+	'Cell Back color
+	v.Local.sProp.Set("CellBackColor")
+	v.Local.sValue.Set("MintCream")
+	gui.Form.gsInv.SetColumnProperty("gvInv","Part",v.Local.sProp,v.Local.sValue)
+	gui.Form.gsInv.SetColumnProperty("gvInv","Location",v.Local.sProp,v.Local.sValue)
+	gui.Form.gsInv.SetColumnProperty("gvInv","PartLoc",v.Local.sProp,v.Local.sValue)
+	gui.Form.gsInv.SetColumnProperty("gvInv","Description",v.Local.sProp,v.Local.sValue)
+	gui.Form.gsInv.SetColumnProperty("gvInv","PartCreateDate",v.Local.sProp,v.Local.sValue)
+	gui.Form.gsInv.SetColumnProperty("gvInv","Product_Line",v.Local.sProp,v.Local.sValue)
+	gui.Form.gsInv.SetColumnProperty("gvInv","Code_Sort",v.Local.sProp,v.Local.sValue)
+	gui.Form.gsInv.SetColumnProperty("gvInv","UM_Inventory",v.Local.sProp,v.Local.sValue)
+	v.Local.sValue.Set("Linen")
+	gui.Form.gsInv.SetColumnProperty("gvInv","Qty_Onhand",v.Local.sProp,v.Local.sValue)
+	gui.Form.gsInv.SetColumnProperty("gvInv","Qty_OnOrder_PO",v.Local.sProp,v.Local.sValue)
+	gui.Form.gsInv.SetColumnProperty("gvInv","Qty_OnOrder_WO",v.Local.sProp,v.Local.sValue)
+	gui.Form.gsInv.SetColumnProperty("gvInv","Qty_Required",v.Local.sProp,v.Local.sValue)
+	gui.Form.gsInv.SetColumnProperty("gvInv","Net",v.Local.sProp,v.Local.sValue)
+	gui.Form.gsInv.SetColumnProperty("gvInv","ReOrderPoint",v.Local.sProp,v.Local.sValue)
+	gui.Form.gsInv.SetColumnProperty("gvInv","Cost",v.Local.sProp,v.Local.sValue)
+	v.Local.sValue.Set("Moccasin")
+	gui.Form.gsInv.SetColumnProperty("gvInv","Qty_Order",v.Local.sProp,v.Local.sValue)		
+	v.Local.sValue.Set("PaleGoldenrod")
+	gui.Form.gsInv.SetColumnProperty("gvInv","LeadTime",v.Local.sProp,v.Local.sValue)
+	v.Local.sValue.Set("AliceBlue")
+	gui.Form.gsInv.SetColumnProperty("gvInv","AnnualUsage",v.Local.sProp,v.Local.sValue)
+	gui.Form.gsInv.SetColumnProperty("gvInv","TransactionCount",v.Local.sProp,v.Local.sValue)
+	gui.Form.gsInv.SetColumnProperty("gvInv","AvgTransactionAmount",v.Local.sProp,v.Local.sValue)
+	gui.Form.gsInv.SetColumnProperty("gvInv","AvgDailyUsage",v.Local.sProp,v.Local.sValue)
+	gui.Form.gsInv.SetColumnProperty("gvInv","StdADU",v.Local.sProp,v.Local.sValue)
+	gui.Form.gsInv.SetColumnProperty("gvInv","CurProjInvTurn",v.Local.sProp,v.Local.sValue)
+	gui.Form.gsInv.SetColumnProperty("gvInv","ProjectedDaysOnhand",v.Local.sProp,v.Local.sValue)
+	gui.Form.gsInv.SetColumnProperty("gvInv","DaysOnhandDelta",v.Local.sProp,v.Local.sValue)
+	v.Local.sValue.Set("LightGrey")
+	gui.Form.gsInv.SetColumnProperty("gvInv","LastYMUsage",v.Local.sProp,v.Local.sValue)
+	gui.Form.gsInv.SetColumnProperty("gvInv","AvgMonthUsage",v.Local.sProp,v.Local.sValue)
+	gui.Form.gsInv.SetColumnProperty("gvInv","SeasonalFactor",v.Local.sProp,v.Local.sValue)
+	gui.Form.gsInv.SetColumnProperty("gvInv","WeightedSeasonalFactor",v.Local.sProp,v.Local.sValue)
+	gui.Form.gsInv.SetColumnProperty("gvInv","LargestInvPull90Days",v.Local.sProp,v.Local.sValue)
+	gui.Form.gsInv.SetColumnProperty("gvInv","VariabilityFactor",v.Local.sProp,v.Local.sValue)
+	gui.Form.gsInv.SetColumnProperty("gvInv","WeightedVariabilityFactor",v.Local.sProp,v.Local.sValue)
+	gui.Form.gsInv.SetColumnProperty("gvInv","CalculatedReorderPoint",v.Local.sProp,v.Local.sValue)
+	v.Local.sValue.Set("Lavender")
+	gui.Form.gsInv.SetColumnProperty("gvInv","CalculatedReorderPointDifference",v.Local.sProp,v.Local.sValue)
+	gui.Form.gsInv.SetColumnProperty("gvInv","ReorderPointVarience",v.Local.sProp,v.Local.sValue)
+	gui.Form.gsInv.SetColumnProperty("gvInv","NetDelta",v.Local.sProp,v.Local.sValue)
+	gui.Form.gsInv.SetColumnProperty("gvInv","NetVarience",v.Local.sProp,v.Local.sValue)	
+	gui.Form.gsInv.SetColumnProperty("gvInv","CostEstimateDelta",v.Local.sProp,v.Local.sValue)	
+	v.Local.sValue.Set("YellowGreen")
+	gui.Form.gsInv.SetColumnProperty("gvInv","CalculatedRPointDisplay",v.Local.sProp,v.Local.sValue)	
+
+	v.Local.sProp.Set("ToolTip")
+	gui.Form.gsInv.SetColumnProperty("gvInv","Net",v.Local.sProp,"Net = Onhand + Qty On OrderPO + Qty On OrderWO - Qty Required")
+	gui.Form.gsInv.SetColumnProperty("gvInv","AvgDailyUsage",v.Local.sProp,"Avg Daily Usage = Annual Usage /  262 days")
+	gui.Form.gsInv.SetColumnProperty("gvInv","TransactionCount",v.Local.sProp,"Transaction Count for the year")
+	gui.Form.gsInv.SetColumnProperty("gvInv","AvgTransactionAmount",v.Local.sProp,"Average Transaction Amount = Annual Usage / Transaction Count")
+	gui.Form.gsInv.SetColumnProperty("gvInv","StdADU",v.Local.sProp,"Standard Deviation of Transaction on Avg Daily Usage")
+	gui.Form.gsInv.SetColumnProperty("gvInv","CurProjInvTurn",v.Local.sProp,"Current Projected Inventory Turn = Annual Usage / Onhand")
+	gui.Form.gsInv.SetColumnProperty("gvInv","ProjectedDaysOnhand",v.Local.sProp,"Projected Days Onhand = Onhand / Average Daily Usage")
+	gui.Form.gsInv.SetColumnProperty("gvInv","DaysOnhandDelta",v.Local.sProp,"Days Onhand Delta = Projected Days Onhand - Lead Time")
+	gui.Form.gsInv.SetColumnProperty("gvInv","AvgMonthUsage",v.Local.sProp,"Avg Month Usage = Annual Usage / 12")
+	gui.Form.gsInv.SetColumnProperty("gvInv","SeasonalFactor",v.Local.sProp,"Seasonal Factor = A Year Ago This Month Usage / Avg Month Usage")
+	gui.Form.gsInv.SetColumnProperty("gvInv","WeightedSeasonalFactor",v.Local.sProp,"Weighted Seasonal Factor = 1 - [(1 - Seasonal Factor) * Seasonal Weight]")
+	gui.Form.gsInv.SetColumnProperty("gvInv","VariabilityFactor",v.Local.sProp,"Variability Factor = Largest of previous 90 Days Inv. Pull / Avg Daily Usage")
+	gui.Form.gsInv.SetColumnProperty("gvInv","WeightedVariabilityFactor",v.Local.sProp,"Weighted Variability Factor = 1 - [(1 - Variability Factor) * Variability Weight]")
+	'gui.Form.gsInv.SetColumnProperty("gvInv","CalculatedReorderPoint",v.Local.sProp,"Calculated Reorder Point = ADU * Lead Time * Weighted Seasonal Factor * Weighted Variablity Factor")
+	gui.Form.gsInv.SetColumnProperty("gvInv","CalculatedReorderPointDifference",v.Local.sProp,"Calculated ReorderPoint Difference = Calcualted ReorderPoint - ReorderPoint ")
+	gui.Form.gsInv.SetColumnProperty("gvInv","ReorderPointVarience",v.Local.sProp,"ReorderPoint Varience = 100 * (Calcualted ReorderPoint - Reorder Point)/Calculated ReorderPoint")
+	gui.Form.gsInv.SetColumnProperty("gvInv","NetDelta",v.Local.sProp,"Net Delta = Calculated ReorderPoint - Net")
+	gui.Form.gsInv.SetColumnProperty("gvInv","NetVarience",v.Local.sProp,"Net Varience = 100*(Calculated Reorder Point -Net Amount)/Calculated ReorderPoint")	
+	gui.Form.gsInv.SetColumnProperty("gvInv","CostEstimateDelta",v.Local.sProp,"Cost Estimate Delta = (Calculated ReorderPoint - Net)* Current Cost ")	
+	gui.Form.gsInv.SetColumnProperty("gvInv","CalculatedRPointDisplay",v.Local.sProp,"Calculated Reorder Point = ADU * Lead Time * Weighted Seasonal Factor * Weighted Variablity Factor")	
+
+	gui.Form.gsInv.MainView("gvInv")
+
+f.Intrinsic.Control.Catch
+	f.Intrinsic.Control.CallSub("Catching","sub",v.Ambient.CurrentSubroutine,"errorno",v.Ambient.ErrorNumber,"errordesc",v.Ambient.ErrorDescription)
+f.Intrinsic.Control.EndTry
+Program.Sub.Format_Inv.End
+
+Program.Sub.FormatColumns.Start
+f.Intrinsic.Control.Try
+	v.Local.sProp.Declare
+	v.Local.sValue.Declare
+	v.Local.iIndex.Declare
+
+	v.Local.sProp.Set(v.Args.sProp)
+	v.Local.sValue.Set(v.Args.sValue)
+	gui.Form.gsInv.SetColumnProperty("gvInv","SelectRow",v.Local.sProp,v.Local.sValue)
+	gui.Form.gsInv.SetColumnProperty("gvInv","Part",v.Local.sProp,v.Local.sValue)
+	gui.Form.gsInv.SetColumnProperty("gvInv","Location",v.Local.sProp,v.Local.sValue)
+	gui.Form.gsInv.SetColumnProperty("gvInv","PartLoc",v.Local.sProp,v.Local.sValue)
+	gui.Form.gsInv.SetColumnProperty("gvInv","Description",v.Local.sProp,v.Local.sValue)
+	gui.Form.gsInv.SetColumnProperty("gvInv","PartCreateDate",v.Local.sProp,v.Local.sValue)
+	gui.Form.gsInv.SetColumnProperty("gvInv","Product_Line",v.Local.sProp,v.Local.sValue)
+	gui.Form.gsInv.SetColumnProperty("gvInv","Code_Sort",v.Local.sProp,v.Local.sValue)
+	gui.Form.gsInv.SetColumnProperty("gvInv","UM_Inventory",v.Local.sProp,v.Local.sValue)
+	gui.Form.gsInv.SetColumnProperty("gvInv","Qty_Onhand",v.Local.sProp,v.Local.sValue)
+	gui.Form.gsInv.SetColumnProperty("gvInv","Qty_OnOrder_PO",v.Local.sProp,v.Local.sValue)
+	gui.Form.gsInv.SetColumnProperty("gvInv","Qty_OnOrder_WO",v.Local.sProp,v.Local.sValue)
+	gui.Form.gsInv.SetColumnProperty("gvInv","Qty_Required",v.Local.sProp,v.Local.sValue)
+	gui.Form.gsInv.SetColumnProperty("gvInv","Net",v.Local.sProp,v.Local.sValue)
+	gui.Form.gsInv.SetColumnProperty("gvInv","Qty_Order",v.Local.sProp,v.Local.sValue)	
+	gui.Form.gsInv.SetColumnProperty("gvInv","LeadTime",v.Local.sProp,v.Local.sValue)
+	gui.Form.gsInv.SetColumnProperty("gvInv","ReOrderPoint",v.Local.sProp,v.Local.sValue)
+	gui.Form.gsInv.SetColumnProperty("gvInv","AnnualUsage",v.Local.sProp,v.Local.sValue)
+	gui.Form.gsInv.SetColumnProperty("gvInv","TransactionCount",v.Local.sProp,v.Local.sValue)
+	gui.Form.gsInv.SetColumnProperty("gvInv","AvgTransactionAmount",v.Local.sProp,v.Local.sValue)
+	gui.Form.gsInv.SetColumnProperty("gvInv","AvgDailyUsage",v.Local.sProp,v.Local.sValue)
+	gui.Form.gsInv.SetColumnProperty("gvInv","StdADU",v.Local.sProp,v.Local.sValue)
+	gui.Form.gsInv.SetColumnProperty("gvInv","CurProjInvTurn",v.Local.sProp,v.Local.sValue)
+	gui.Form.gsInv.SetColumnProperty("gvInv","ProjectedDaysOnhand",v.Local.sProp,v.Local.sValue)
+	gui.Form.gsInv.SetColumnProperty("gvInv","DaysOnhandDelta",v.Local.sProp,v.Local.sValue)
+	gui.Form.gsInv.SetColumnProperty("gvInv","LastYMUsage",v.Local.sProp,v.Local.sValue)
+	gui.Form.gsInv.SetColumnProperty("gvInv","AvgMonthUsage",v.Local.sProp,v.Local.sValue)
+	gui.Form.gsInv.SetColumnProperty("gvInv","SeasonalFactor",v.Local.sProp,v.Local.sValue)
+	gui.Form.gsInv.SetColumnProperty("gvInv","WeightedSeasonalFactor",v.Local.sProp,v.Local.sValue)
+	gui.Form.gsInv.SetColumnProperty("gvInv","LargestInvPull90Days",v.Local.sProp,v.Local.sValue)
+	
+	gui.Form.gsInv.SetColumnProperty("gvInv","VariabilityFactor",v.Local.sProp,v.Local.sValue)
+	gui.Form.gsInv.SetColumnProperty("gvInv","WeightedVariabilityFactor",v.Local.sProp,v.Local.sValue)
+	gui.Form.gsInv.SetColumnProperty("gvInv","CalculatedReorderPoint",v.Local.sProp,v.Local.sValue)
+	gui.Form.gsInv.SetColumnProperty("gvInv","CalculatedReorderPointDifference",v.Local.sProp,v.Local.sValue)
+	gui.Form.gsInv.SetColumnProperty("gvInv","ReorderPointVarience",v.Local.sProp,v.Local.sValue)
+	gui.Form.gsInv.SetColumnProperty("gvInv","NetDelta",v.Local.sProp,v.Local.sValue)
+	gui.Form.gsInv.SetColumnProperty("gvInv","NetVarience",v.Local.sProp,v.Local.sValue)
+	gui.Form.gsInv.SetColumnProperty("gvInv","Cost",v.Local.sProp,v.Local.sValue)
+	gui.Form.gsInv.SetColumnProperty("gvInv","CostEstimateDelta",v.Local.sProp,v.Local.sValue)
+	gui.Form.gsInv.SetColumnProperty("gvInv","CalculatedRPointDisplay",v.Local.sProp,v.Local.sValue)	
+
+f.Intrinsic.Control.Catch
+	f.Intrinsic.Control.CallSub("Catching","sub",v.Ambient.CurrentSubroutine,"errorno",v.Ambient.ErrorNumber,"errordesc",v.Ambient.ErrorDescription)
+f.Intrinsic.Control.EndTry
+Program.Sub.FormatColumns.End
+
+Program.Sub.gsInv_RowCellClick.Start
+f.Intrinsic.Control.Try
+	V.Local.bFlag.Declare
+	V.Local.iX.Declare
+	v.Local.iY.Declare
+
+	Gui.Form.gsInv.GetCellValueByColumnName("gvInv","PART",v.Args.rowIndex,v.Global.sPart)
+	Gui.Form.gsInv.GetCellValueByColumnName("gvInv","LOCATION",v.Args.rowIndex,v.Global.sLoc)
+	v.Global.iRowIndex.Set(v.Args.RowIndex)	
+
+	f.Intrinsic.Control.SelectCase(v.Args.Column.UCase)
+		f.Intrinsic.Control.Case("SELECTROW")
+			v.Local.bFlag.Set(v.DataTable.Inv(v.Args.RowIndex).SelectRow!FieldValString)
+			f.Data.Datatable.SetValue("Inv",v.Args.RowIndex,"SelectRow",v.Local.bFlag.Not)	
+	F.Intrinsic.Control.CaseAny("PART","LOCATION")
+		f.Intrinsic.API.GetMousePosition(v.Local.iX,v.Local.iY)
+		f.Intrinsic.Math.Add(v.Local.iY,15,v.Local.iY)	
+			GUI.Form..ContextMenuShow("Line",v.Local.iX,v.Local.iY)		
+
+	f.Intrinsic.Control.EndSelect
+
+f.Intrinsic.Control.Catch
+	f.Intrinsic.Control.CallSub("Catching","sub",v.Ambient.CurrentSubroutine,"errorno",v.Ambient.ErrorNumber,"errordesc",v.Ambient.ErrorDescription)
+f.Intrinsic.Control.EndTry
+Program.Sub.gsInv_RowCellClick.End
+
+Program.Sub.CreateContextMenu.Start
+F.Intrinsic.Control.Try
+
+	gui.Form..ContextMenuCreate("Line")
+	gui.Form..ContextMenuAddItem("Line","SupplyAndDemandView",0,"Supply and Demand View")
+	gui.Form..ContextMenuAddItem("Line","SupplyAndDemandEdit",0,"Supply and Demand Edit")
+	gui.Form..ContextMenuAddItem("Line","PARTVIEW",0,"Part View")
+	gui.Form..ContextMenuAddItem("Line","PARTEDIT",0,"Part Edit")	
+
+	Gui.Form..ContextMenuSetItemEventHandler("Line","SupplyAndDemandView","LineHandler")
+	Gui.Form..ContextMenuSetItemEventHandler("Line","SupplyAndDemandEdit","LineHandler")
+	Gui.Form..ContextMenuSetItemEventHandler("Line","PARTVIEW","LineHandler")
+	Gui.Form..ContextMenuSetItemEventHandler("Line","PARTEDIT","LineHandler")
+
+	gui.Form..ContextMenuCreate("General")
+	gui.Form..ContextMenuAddItem("General","Refresh",0,"Refresh")
+	gui.Form..ContextMenuAddItem("General","SelectAll",0,"Select All")
+	gui.Form..ContextMenuAddItem("General","DeSelectAll",0,"Deselect All")		
+	gui.Form..ContextMenuAddItem("General","Export",0,"Export")
+	gui.Form..ContextMenuAddItem("General","GSSWebsite",0,"GSS Website")
+	gui.Form..ContextMenuAddItem("General","ServiceWeb",0,"Service Web")
+
+	Gui.Form..ContextMenuSetItemEventHandler("General","Refresh","GeneralHandler")
+	Gui.Form..ContextMenuSetItemEventHandler("General","Export","GeneralHandler")
+	Gui.Form..ContextMenuSetItemEventHandler("General","GSSWebsite","GeneralHandler")
+	Gui.Form..ContextMenuSetItemEventHandler("General","ServiceWeb","GeneralHandler")
+	Gui.Form..ContextMenuSetItemEventHandler("General","SelectAll","GeneralHandler")
+	Gui.Form..ContextMenuSetItemEventHandler("General","DeSelectAll","GeneralHandler")
+
+	gui.Form.gsInv.ContextMenuAttach("General")
+
+f.Intrinsic.Control.Catch
+	f.Intrinsic.Control.CallSub("Catching","sub",v.Ambient.CurrentSubroutine,"errorno",v.Ambient.ErrorNumber,"errordesc",v.Ambient.ErrorDescription)
+f.Intrinsic.Control.EndTry
+Program.Sub.CreateContextMenu.End
+
+Program.Sub.LineHandler.Start
+F.Intrinsic.Control.Try
+	V.Local.sError.Declare
+
+	V.Local.sJOB.Declare
+	V.Local.sSuf.Declare
+	V.Local.sParams.Declare
+	v.Local.sTemp.Declare
+	v.Local.bAuth.Declare
+
+	F.Intrinsic.Control.SelectCase(v.Args.ItemName.UCase)
+
+		'additions made for project 6262 if the PART column is selected launch the Supply and Demand screen
+		f.Intrinsic.Control.Case("SUPPLYANDDEMANDEDIT")
+			f.Global.Security.CheckUserAccessIPM(371,0,v.Local.bAuth)
+			f.Intrinsic.Control.If(v.Local.bAuth.Not)
+				f.Intrinsic.UI.Msgbox("User does not have permission to Supply and Demand Edit screen.","Menu Item Not Assigned")
+				f.Intrinsic.Control.ExitSub
+			f.Intrinsic.Control.EndIf		
+			'if the edit radio button is selected then launch as open
+			F.Intrinsic.String.Build("{0}!*!{1}!*!O",v.Global.sPart,v.Global.sLoc,v.Local.sParams)
+			F.Global.General.CallWrapperASync(300010,v.Local.sParams)
+		F.Intrinsic.Control.Case("SUPPLYANDDEMANDVIEW")
+			f.Global.Security.CheckUserAccessIPM(321,0,v.Local.bAuth)
+			f.Intrinsic.Control.If(v.Local.bAuth.Not)
+				f.Intrinsic.UI.Msgbox("User does not have permission to Supply and Demand View screen.","Menu Item Not Assigned")
+				f.Intrinsic.Control.ExitSub
+			f.Intrinsic.Control.EndIf		
+			'otherwise if the edit radio button is not selected launch the supply and demand without edit
+			F.Intrinsic.String.Build("{0}!*!{1}!*!A",v.Global.sPart,v.Global.sLoc,v.Local.sParams)
+			F.Global.General.CallWrapperASync(300010,v.Local.sParams)
+
+		f.Intrinsic.Control.Case("PARTVIEW")
+			Function.Global.Security.CheckUserAccessIPM(312,0,v.Local.bAuth)
+			f.Intrinsic.Control.If(v.Local.bAuth.Not)
+				f.Intrinsic.UI.Msgbox("User does not have permission to Inventory > View > Inventory Parts.","Menu Item Not Assigned")
+				f.Intrinsic.Control.ExitSub
+			f.Intrinsic.Control.EndIf	
+			f.Data.DataTable.AddRow("3500","CompanyCode",v.Caller.CompanyCode,"Mode","V","PART",v.Global.sPart,"LOC",V.Global.sLoc)
+			F.Intrinsic.Control.CallSub(3500Sync)	
+
+		f.Intrinsic.Control.Case("PARTEDIT")
+			Function.Global.Security.CheckUserAccessIPM(310,1,v.Local.bAuth)
+			f.Intrinsic.Control.If(v.Local.bAuth.Not)
+				f.Intrinsic.UI.Msgbox("User does not have permission to Inventory > File > Inventory Parts > Open.","Menu Item Not Assigned")
+				f.Intrinsic.Control.ExitSub
+			f.Intrinsic.Control.EndIf			
+			f.Data.DataTable.AddRow("3500","CompanyCode",v.Caller.CompanyCode,"Mode","O","PART",v.Global.sPart,"LOC",V.Global.sLoc)
+			F.Intrinsic.Control.CallSub(3500Sync)	
+
+	F.Intrinsic.Control.EndSelect
+
+f.Intrinsic.Control.Catch
+	f.Intrinsic.Control.CallSub("Catching","sub",v.Ambient.CurrentSubroutine,"errorno",v.Ambient.ErrorNumber,"errordesc",v.Ambient.ErrorDescription)
+f.Intrinsic.Control.EndTry
+F.Intrinsic.Control.EndTry
+
+Program.Sub.LineHandler.End
+
+Program.Sub.GeneralHandler.Start
+f.Intrinsic.Control.Try
+	v.Local.sError.Declare
+
+	f.Intrinsic.Control.SelectCase(v.Args.ItemName.UCase)
+		f.Intrinsic.Control.Case("REFRESH")
+			F.Intrinsic.Control.CallSub(Form_RefreshClick)
+
+		f.Intrinsic.Control.Case("SELECTALL")
+			F.Data.Datatable.SetValue("Inv",-1,"SelectRow",True)
+
+		f.Intrinsic.Control.Case("DESELECTALL")
+			F.Data.Datatable.SetValue("Inv",-1,"SelectRow",False)			
+
+		f.Intrinsic.Control.Case("EXPORT")
+			F.Intrinsic.Control.CallSub(Form_ExportClick)	
+
+		f.Intrinsic.Control.Case("GSSWEBSITE")
+			F.Intrinsic.Task.ShellExec(0,"Open","http://www.globalshopsolutions.com/","","",0)
+		f.Intrinsic.Control.Case("SERVICEWEB")
+			F.Intrinsic.Task.ShellExec(0,"Open","https://www.gss-service.com/","","",0)			
+
+	f.Intrinsic.Control.EndSelect	
+
+f.Intrinsic.Control.Catch
+	f.Intrinsic.Control.CallSub("Catching","sub",v.Ambient.CurrentSubroutine,"errorno",v.Ambient.ErrorNumber,"errordesc",v.Ambient.ErrorDescription)
+f.Intrinsic.Control.EndTry
+Program.Sub.GeneralHandler.End
+
+Program.Sub.gsInv_CellValueChanged.Start
+Program.Sub.gsInv_CellValueChanged.End
+
+Program.Sub.cmdUpdateOrderQty_Click.Start
+f.Intrinsic.Control.Try
+
+	f.Intrinsic.Control.CallSub(Update_Inventory_Mstr,"sColumn","QTY_ORDER")
+
+f.Intrinsic.Control.Catch
+	f.Intrinsic.Control.CallSub("Catching","sub",v.Ambient.CurrentSubroutine,"errorno",v.Ambient.ErrorNumber,"errordesc",v.Ambient.ErrorDescription)
+f.Intrinsic.Control.EndTry
+Program.Sub.cmdUpdateOrderQty_Click.End
+
+Program.Sub.cmdUpdateLead_Click.Start
+f.Intrinsic.Control.Try
+
+	f.Intrinsic.Control.CallSub(Update_Inventory_Mstr,"sColumn","TIME_MATERIAL_LEAD")
+
+f.Intrinsic.Control.Catch
+	f.Intrinsic.Control.CallSub("Catching","sub",v.Ambient.CurrentSubroutine,"errorno",v.Ambient.ErrorNumber,"errordesc",v.Ambient.ErrorDescription)
+f.Intrinsic.Control.EndTry
+Program.Sub.cmdUpdateLead_Click.End
+
+Program.Sub.cmdUpdateReorderPoint_Click.Start
+f.Intrinsic.Control.Try
+	v.Local.iCnt.Declare
+	v.Local.sPart.Declare
+	v.Local.sLocation.Declare
+	v.Local.sSQL.Declare
+	v.Local.sDatatableColumn.Declare
+	v.Local.sAlertColumn.Declare
+	V.Local.fHold.Declare
+
+	f.Intrinsic.Control.If(v.DataView.Inv!vSel.Exists)
+		f.Data.DataView.Close("Inv","vSel")
+	f.Intrinsic.Control.EndIf
+	f.Data.DataView.Create("Inv","vSel",22,"SelectRow = 1","")
+	f.Intrinsic.Control.If(v.DataView.Inv!vSel.RowCount,=,0)
+		f.Intrinsic.UI.Msgbox("Please select row.","Attention")
+		f.Intrinsic.Control.ExitSub	
+	f.Intrinsic.Control.EndIf
+
+	gui.Progress..Visible(True)
+	gui.Progress.proBar1.Max(v.DataView.Inv!vSel.RowCount)
+
+	f.Intrinsic.Control.For(v.Local.iCnt,0,v.DataView.Inv!vSel.RowCount--,1)
+		gui.Progress.proBar1.Value(v.Local.iCnt)
+		v.Local.sPart.Set(v.DataView.Inv!vSel(v.Local.iCnt).Part!FieldVAlString)
+		v.Local.sLocation.Set(v.DataView.Inv!vSel(v.Local.iCnt).Location!FieldValString)
+		v.Local.fHold.Set(v.DataView.Inv!vSel(v.Local.iCnt).CalculatedRPointDisplay!FieldValString)
+
+		f.Intrinsic.String.Build("Update Inventory_MSTR set {2} = '{3}' where Part = '{0}' and Location = '{1}'",v.Local.sPart.PSQLFriendly,v.Local.sLocation.PSQLFriendly,"QTY_REORDER",v.Local.fHold,V.Local.sSQL)
+		f.Data.DataView.SetValue("Inv","vSel",v.Local.iCnt,"ReOrderPoint",v.Local.fHold)	
+
+		f.ODBC.Connection!conx.Execute(v.Local.sSQL)
+
+	f.Intrinsic.Control.Next(v.Local.iCnt)
+	gui.Progress..Visible(False)
+	gui.Form..ShowAlert("MyAlert","Updated","Reorder Point has been updated.",v.Enum.Image!WARNING_BLACK)	
+
+f.Intrinsic.Control.Catch
+	f.Intrinsic.Control.CallSub("Catching","sub",v.Ambient.CurrentSubroutine,"errorno",v.Ambient.ErrorNumber,"errordesc",v.Ambient.ErrorDescription)
+f.Intrinsic.Control.EndTry
+Program.Sub.cmdUpdateReorderPoint_Click.End
+
+Program.Sub.Update_Inventory_Mstr.Start
+f.Intrinsic.Control.Try
+	v.Local.iCnt.Declare
+	v.Local.sPart.Declare
+	v.Local.sLocation.Declare
+	v.Local.sSQL.Declare
+	v.Local.sDatatableColumn.Declare
+	v.Local.sAlertColumn.Declare
+
+	f.Intrinsic.Control.If(v.DataView.Inv!vSel.Exists)
+		f.Data.DataView.Close("Inv","vSel")
+	f.Intrinsic.Control.EndIf
+	f.Data.DataView.Create("Inv","vSel",22,"SelectRow = 1","")
+	f.Intrinsic.Control.If(v.DataView.Inv!vSel.RowCount,=,0)
+		f.Intrinsic.UI.Msgbox("Please select row.","Attention")
+		f.Intrinsic.Control.ExitSub	
+	f.Intrinsic.Control.EndIf
+
+	f.Intrinsic.Control.If(v.Args.sColumn.UCase,=,"QTY_ORDER")
+		v.Local.sDatatableColumn.Set(v.Args.sColumn)
+		v.Local.sAlertColumn.Set("Order Qty has been updated.")
+	f.Intrinsic.Control.ElseIf(v.Args.sColumn,=,"TIME_MATERIAL_LEAD")
+		V.Local.sDatatableColumn.Set("LeadTime")
+		v.Local.sAlertColumn.Set("Lead Time has been updated.")
+	f.Intrinsic.Control.Else
+		f.Intrinsic.Control.ExitSub
+	f.Intrinsic.Control.EndIf	
+
+
+	gui.Progress..Visible(True)
+	gui.Progress.proBar1.Max(v.DataView.Inv!vSel.RowCount)
+
+	f.Intrinsic.Control.For(v.Local.iCnt,0,v.DataView.Inv!vSel.RowCount--,1)
+		gui.Progress.proBar1.Value(v.Local.iCnt)
+		v.Local.sPart.Set(v.DataView.Inv!vSel(v.Local.iCnt).Part!FieldVAlString)
+		v.Local.sLocation.Set(v.DataView.Inv!vSel(v.Local.iCnt).Location!FieldValString)
+		f.Intrinsic.String.Build("Update Inventory_MSTR set {2} = '{3}' where Part = '{0}' and Location = '{1}'",v.Local.sPart.PSQLFriendly,v.Local.sLocation.PSQLFriendly,v.Args.sColumn,v.DataView.Inv!vSel(v.Local.iCnt).[v.Local.sDatatableColumn]!FieldValString,V.Local.sSQL)
+		f.ODBC.Connection!conx.Execute(v.Local.sSQL)
+
+	f.Intrinsic.Control.Next(v.Local.iCnt)
+	gui.Progress..Visible(False)
+	gui.Form..ShowAlert("MyAlert","Updated",v.Local.sAlertColumn,v.Enum.Image!WARNING_BLACK)	
+
+f.Intrinsic.Control.Catch
+	f.Intrinsic.Control.CallSub("Catching","sub",v.Ambient.CurrentSubroutine,"errorno",v.Ambient.ErrorNumber,"errordesc",v.Ambient.ErrorDescription)
+f.Intrinsic.Control.EndTry
+Program.Sub.Update_Inventory_Mstr.End
+
+Program.Sub.Progress_UnLoad.Start
+gui.Progress..Visible(False)
+Program.Sub.Progress_UnLoad.End
+
+Program.Sub.Comments.Start
+${$0$}$$}$$}$12:00:00 AM$}$False
+${$5$}$2.0.0.0$}$2
+${$6$}$bnguyen$}$20221121221055640$}$tqzwddZCkmoVRWHEL6DZymEEseDhOdziirnjNXDiq1voBc3PL2UQx19E9Brih0+IRO6oxXSos74=
+Program.Sub.Comments.End
